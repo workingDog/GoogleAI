@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  KwuikAI
+
+  Created by Ringo Wathelet on 2023/04/10.
+  
+*/
+
+
+"image" = "Image";
+"text" = "Text";
+"chat" = "Chat";
+"mode" = "mode";
+"Temperature" = "Temp";
+"Max tokens" = "Tokens";
+
+"en" = "English";
+"ja" = "Japanese";
+
+

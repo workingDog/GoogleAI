@@ -1,0 +1,15 @@
+{
+  "originHash" : "fb9ac36071f364d419c527ac181073d029907ab8c2d0a2cf5e1dbf2b4a353436",
+  "pins" : [
+    {
+      "identity" : "generative-ai-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/generative-ai-swift",
+      "state" : {
+        "branch" : "main",
+        "revision" : "48a0c2f11935a17132492583d4aad51c5a407bcb"
+      }
+    }
+  ],
+  "version" : 3
+}

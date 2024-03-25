@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  KwuikAI
+
+  Created by Ringo Wathelet on 2023/04/10.
+  
+*/
+"Chat" = "会話";  //  "喋る";   会話  "チャット"
+"Ask" = "聞く";
+"Show" = "見せる";
+"Mode" = "モード";
+"Save" = "保存";
+"Colors" = "色";
+"Theme" = "テーマ";
+"Back" = "戻る";
+"Text" = "文章";
+"Question" = "質問";
+"Answer" = "答え";
+"Image" = "画像";
+"Temperature" = "温度";
+"Max tokens" = "最大トークン";
+"Done" = "終わり";
+
+"text" = "文章";
+"image" = "画像";
+"chat" = "会話";
+"mode" = "モード";
+
+"en" = "英語";
+"ja" = "日本語";
+
+"Clear all" = "すべてクリア";
+"Delete this entry" = "このアイテムを削除";
+"Dark" = "暗い";
+"Max images" = "画像の最大数";
+"Selected" = "選択済み";
+"Copy" = "コピー";
+"Tools" = "道具";
+"Enter key" = "キーを入力してください";
+
+"No results available" = "結果がありません";
+"Check your OpenAI api key \n or account limit" = "OpenAI API キー \n またはアカウント制限を確認してください";
+
+"Copy your OpenAI key from" = "から OpenAI キーをコピーします";
+"Type here first..." = "最初にここに入力してください...";
+"Camera" = "カメラ";
