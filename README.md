@@ -6,13 +6,18 @@ Using, the **Google AI SDK for Swift** `Client Library in Swift` [Google AI SDK 
 
 
 <p float="left">
-  <img src="Images/screen4.png" width="333"  height="444" />
-    <img src="Images/screen3.png" width="333"  height="444" />
+  <img src="Images/s2.png" width="333"  height="444" />
+    <img src="Images/s1.png" width="333"  height="444" />
 </p>
 
 
 ### Usage
 
+-   **Pick** the conversation mode first, `Chat`, `Image` or `Camera`, then type a question **before** you tap on the main button.
+        - `Chat` for chat like interaction,
+        - `Image` for selecting an image from the Photos library,
+        - `Camera` to take a picture using the camera.
+    
 -   **Tap** on a question or answer, to **copy** the text to the `Pasteboard` and enable you to paste it elsewhere. Similarly, tap on the picture to copy just the image.
   
 -   **Swipe left** on a question/answer, to deleted it.
@@ -20,9 +25,6 @@ Using, the **Google AI SDK for Swift** `Client Library in Swift` [Google AI SDK 
 -   **Tap** on the `trash can`, to delete **all** questions and answers. 
 
 -   **Tap** on the `share`, to share the previously tapped answer. 
-
--   **Pick** the AI answer type, `Text`, `Image` or `Chat`.
-
 
 
 #### Settings
