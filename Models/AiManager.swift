@@ -62,18 +62,16 @@ import GoogleGenerativeAI
         }
     }
     
-    func getVision(from text: String, images: [UIImage] = []) async {
+    func getVision(from text: String, images: [UIImage]) async {
+        guard let img = images.first else {
+            errorDetected = true
+            print("no image to process")
+            return
+        }
         do {
-            var results: GenerateContentResponse
-            var imag: [UIImage] = []
-            if let img = images.first {
-                imag = [img]
-                results = try await client.generateContent(text, img)
-            } else {
-                results = try await client.generateContent(text)
-            }
+            let results = try await client.generateContent(text, img)
             if let output = results.text {
-                conversations.last?.answers.append(Answer(text: output, uimage: imag))
+                conversations.last?.answers.append(Answer(text: output, uimage: [img]))
             } else {
                 errorDetected = true
             }

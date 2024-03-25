@@ -14,7 +14,7 @@ struct MainView: View {
     @Environment(AiManager.self) var aiManager
     @Environment(InterfaceManager.self) var interface
     
-    @State private var text = ""
+    @State private var text = "describe"
     @State private var isThinking = false
     @State private var isPressed = false
     
@@ -38,11 +38,14 @@ struct MainView: View {
         }
         .photosPicker(isPresented: $showPhotoPicker, selection: $photoItem)
         .onChange(of: photoItem) {
-            Task {
-                if let data = try? await photoItem?.loadTransferable(type: Data.self) {
-                    selectedImage = UIImage(data: data)
-                } else {
-                    print("Failed to load the image")
+            if photoItem != nil {
+                Task {
+                    if let data = try? await photoItem?.loadTransferable(type: Data.self) {
+                        selectedImage = UIImage(data: data)
+                        photoItem = nil
+                    } else {
+                        print("Failed to load the image")
+                    }
                 }
             }
         }
@@ -53,7 +56,9 @@ struct MainView: View {
             CameraView(selectedImage: $selectedImage)
         }
         .onChange(of: selectedImage) {
-            doAsk()
+            if selectedImage != nil {
+                doAsk()
+            }
         }
     }
     
@@ -72,14 +77,21 @@ struct MainView: View {
                     text = ""
                 }
             }) {
-                Text(aiManager.selectedMode == .chat ? "Chat" : aiManager.selectedMode == .image ? "Image" : "Camera")
-                .font(Font.custom("Didot-Italic", size: 18))
-                .frame(width: 88, height: 88)
-                .foregroundColor(interface.textColor)
-                .background(isPressed ? interface.copyColor : interface.questionColor)
-                .animation(.easeInOut(duration: 0.2)
-                    .reverse(on: $isPressed, delay: 0.2), value: isPressed)
-                .clipShape(Circle())
+                ZStack {
+                    Text(aiManager.selectedMode == .chat ? "Chat" : aiManager.selectedMode == .image ? "Image" : "Camera")
+                        .font(Font.custom("Didot-Italic", size: 17))
+                        .frame(width: 88, height: 88)
+                        .offset(y: -6)
+                        .foregroundColor(interface.textColor)
+                        .background(isPressed ? interface.copyColor : interface.questionColor)
+                        .animation(.easeInOut(duration: 0.2)
+                            .reverse(on: $isPressed, delay: 0.2), value: isPressed)
+                        .clipShape(Circle())
+
+                    if isThinking {
+                        ProgressView().progressViewStyle(IconRotateStyle()).offset(y: 24)
+                    }
+                }
             }
             .shadow(radius: 10)
        //     .overlay(Circle().stroke(interface.toolsColor, lineWidth: 4))
