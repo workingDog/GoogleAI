@@ -14,7 +14,7 @@ struct MainView: View {
     @Environment(AiManager.self) var aiManager
     @Environment(InterfaceManager.self) var interface
     
-    @State private var text = "describe"
+    @State private var text = ""
     @State private var isThinking = false
     @State private var isPressed = false
     
