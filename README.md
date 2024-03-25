@@ -1,6 +1,6 @@
 # SwiftUI Google Gemini AI demo App
 
-A chat-like SwiftUI Google Gemini REST API demo App, includes text and image output.
+A chat-like SwiftUI Google Gemini REST API demo App, includes text and image input.
 
 Using, the **Google AI SDK for Swift** `Client Library in Swift` [Google AI SDK for Swift](https://github.com/google/generative-ai-swift).
 
@@ -13,7 +13,8 @@ Using, the **Google AI SDK for Swift** `Client Library in Swift` [Google AI SDK 
 
 ### Usage
 
--   **Pick** the conversation mode first, `Chat`, `Image` or `Camera`, then type a question **before** you tap on the main button.
+-   **Pick** the conversation mode first, `Chat`, `Image` or `Camera`, 
+then type a question **before** you tap on the main button.
 
     - `Chat` for chat like interaction,
     - `Image` for selecting an image from the Photos library,
