@@ -14,9 +14,10 @@ Using, the **Google AI SDK for Swift** `Client Library in Swift` [Google AI SDK 
 ### Usage
 
 -   **Pick** the conversation mode first, `Chat`, `Image` or `Camera`, then type a question **before** you tap on the main button.
-        - `Chat` for chat like interaction,
-        - `Image` for selecting an image from the Photos library,
-        - `Camera` to take a picture using the camera.
+
+    - `Chat` for chat like interaction,
+    - `Image` for selecting an image from the Photos library,
+    - `Camera` to take a picture using the camera.
     
 -   **Tap** on a question or answer, to **copy** the text to the `Pasteboard` and enable you to paste it elsewhere. Similarly, tap on the picture to copy just the image.
   
