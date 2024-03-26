@@ -61,17 +61,12 @@ import GoogleGenerativeAI
             self.haveResponse.toggle()
         }
     }
-    
+
     func getVision(from text: String, images: [UIImage]) async {
-        var results: GenerateContentResponse
+        var tempVar = [any ThrowingPartsRepresentable]()
+        tempVar.append(contentsOf: images)
         do {
-            switch images.count {
-                case 1: results = try await client.generateContent(text, images[0])
-                case 2: results = try await client.generateContent(text, images[0], images[1])
-                case 3: results = try await client.generateContent(text, images[0], images[1], images[2])
-                case 4: results = try await client.generateContent(text, images[0], images[1], images[2], images[3])
-                default: results = try await client.generateContent(text)
-            }
+            let results = try await client.generateContent(text, tempVar)
             if let output = results.text {
                 conversations.last?.answers.append(Answer(text: output, uimage: images))
             } else {
