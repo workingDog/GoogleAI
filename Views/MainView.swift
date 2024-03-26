@@ -22,8 +22,8 @@ struct MainView: View {
     
     @State private var showPhotoPicker = false
     @State private var showCamera = false
-    @State private var selectedImage: UIImage?
-    @State private var photoItem: PhotosPickerItem?
+    @State private var selectedImages: [UIImage] = []
+    @State private var photoItems: [PhotosPickerItem] = []
     
     var body: some View {
         @Bindable var aiManager = aiManager
@@ -36,16 +36,19 @@ struct MainView: View {
                 Spacer()
             }
         }
-        .photosPicker(isPresented: $showPhotoPicker, selection: $photoItem)
-        .onChange(of: photoItem) {
-            if photoItem != nil {
+        .photosPicker(isPresented: $showPhotoPicker, selection: $photoItems)
+        .onChange(of: photoItems) {
+            if !photoItems.isEmpty {
+                var tempArr: [UIImage] = []
                 Task {
-                    if let data = try? await photoItem?.loadTransferable(type: Data.self) {
-                        selectedImage = UIImage(data: data)
-                        photoItem = nil
-                    } else {
-                        print("Failed to load the image")
+                    for item in photoItems {
+                        if let data = try? await item.loadTransferable(type: Data.self),
+                           let uiimg = UIImage(data: data) {
+                            tempArr.append(uiimg)
+                        }
                     }
+                    selectedImages = tempArr  // update selectedImages only once
+                    photoItems.removeAll()
                 }
             }
         }
@@ -53,10 +56,10 @@ struct MainView: View {
             Button("OK") { }
         } message: { Text("Check your api key \n or account limit") }
         .fullScreenCover(isPresented: $showCamera) {
-            CameraView(selectedImage: $selectedImage)
+            CameraView(selectedImages: $selectedImages)
         }
-        .onChange(of: selectedImage) {
-            if selectedImage != nil {
+        .onChange(of: selectedImages) {
+            if !selectedImages.isEmpty {
                 doAsk()
             }
         }
@@ -122,8 +125,8 @@ struct MainView: View {
         isThinking = true
         Task { @MainActor in   // <--- do task on the main thread
             if !text.trimmingCharacters(in: .whitespaces).isEmpty {
-                if let img = selectedImage, aiManager.selectedMode != .chat {
-                    await aiManager.getResponse(from: text, images: [img])
+                if !selectedImages.isEmpty, aiManager.selectedMode != .chat {
+                    await aiManager.getResponse(from: text, images: selectedImages)
                 } else {
                     await aiManager.getResponse(from: text)
                 }
@@ -132,5 +135,5 @@ struct MainView: View {
             }
         }
     }
-    
+   
 }

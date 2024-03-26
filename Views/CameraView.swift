@@ -11,7 +11,7 @@ import PhotosUI
 
 
 struct CameraView: UIViewControllerRepresentable {
-    @Binding var selectedImage: UIImage?
+    @Binding var selectedImages: [UIImage]
     @Environment(\.dismiss) var dismiss
     
     func makeUIViewController(context: Context) -> UIImagePickerController {
@@ -41,7 +41,7 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let selectedImage = info[.originalImage] as? UIImage else { return }
-        self.picker.selectedImage = selectedImage
+        self.picker.selectedImages.append(selectedImage)
         self.picker.dismiss()
     }
 }
