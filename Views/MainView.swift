@@ -39,8 +39,8 @@ struct MainView: View {
         .photosPicker(isPresented: $showPhotoPicker, selection: $photoItems)
         .onChange(of: photoItems) {
             if !photoItems.isEmpty {
-                var tempArr: [UIImage] = []
                 Task {
+                    var tempArr: [UIImage] = []
                     for item in photoItems {
                         if let data = try? await item.loadTransferable(type: Data.self),
                            let uiimg = UIImage(data: data) {
