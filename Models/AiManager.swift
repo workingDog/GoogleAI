@@ -19,10 +19,10 @@ import GoogleGenerativeAI
     var haveResponse = false
 
     var selectedMode: ModeType = .chat
-    var googleModel = "gemini-1.0-pro"
+    var googleModel = "gemini-1.0-pro-latest"   //"gemini-1.0-pro"
     var config = GenerationConfig(maxOutputTokens: 1000)
     
-    @ObservationIgnored var client = GenerativeModel(name: "gemini-1.0-pro", apiKey: "", generationConfig: GenerationConfig(maxOutputTokens: 1000))
+    @ObservationIgnored var client = GenerativeModel(name: "gemini-1.0-pro-latest", apiKey: "", generationConfig: GenerationConfig(maxOutputTokens: 1000))
     
     init() {
         let apikey = StoreService.getKey() ?? ""

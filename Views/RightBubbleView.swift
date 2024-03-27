@@ -17,7 +17,6 @@ struct RightBubbleView: View {
     @Binding var isThinking: Bool
     
     @State private var isPressed = false
-    @State private var tappedImageId: UUID?
     
     let pace = 0.05
     @State private var letters: [String] = []
@@ -46,6 +45,7 @@ struct RightBubbleView: View {
                         }
                         .animation(.easeInOut(duration: 0.2)
                             .reverse(on: $isPressed, delay: 0.2), value: isPressed)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 }
             }
         }

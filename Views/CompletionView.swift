@@ -17,7 +17,6 @@ struct CompletionView: View {
     
     @State private var txtIsPressed = false
     @State private var imgIsPressed = false
-    @State private var tappedImageId: UUID?
     
     @ViewBuilder func txtView(_ converse: Conversation) -> some View {
         Text(converse.question.text)
@@ -56,7 +55,7 @@ struct CompletionView: View {
                     VStack {
                         ChatBubble(direction: .left) {
                             //   LeftBubble {
-                            VStack {
+                            VStack(alignment: .leading) {
                                 txtView(converse)
                                 imgView(converse)
                             }
