@@ -37,7 +37,7 @@ struct RightBubbleView: View {
                 if let answer = converse.answers.first {
                     Text(answer.text)
                         .padding(.all, 15)
-                        .foregroundColor(interface.textColor)
+                        .foregroundStyle(interface.textColor)
                         .background(isPressed ? interface.copyColor : interface.answerColor)
                         .onTapGesture {
                             UIPasteboard.general.string = answer.text
@@ -86,7 +86,7 @@ struct RightBubbleView: View {
                  ForEach(converse.answers) { answer in
                      Text(answer.text)
                          .padding(.all, 15)
-                         .foregroundColor(interface.textColor)
+                         .foregroundStyle(interface.textColor)
                          .background(isPressed ? interface.copyColor : interface.answerColor)
                          .onTapGesture {
                              UIPasteboard.general.string = answer.text

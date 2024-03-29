@@ -21,7 +21,7 @@ struct CompletionView: View {
     @ViewBuilder func txtView(_ converse: Conversation) -> some View {
         Text(converse.question.text)
             .padding(.all, 10)
-            .foregroundColor(txtIsPressed && (aiManager.selectedConversation?.id == converse.id) ? interface.copyColor : interface.textColor)
+            .foregroundStyle(txtIsPressed && (aiManager.selectedConversation?.id == converse.id) ? interface.copyColor : interface.textColor)
             .onTapGesture {
                 UIPasteboard.general.string = converse.question.text
                 txtIsPressed.toggle()

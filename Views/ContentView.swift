@@ -75,7 +75,7 @@ struct ContentView: View {
                 modesButton
                 Spacer()
                 settingsButton
-            }.foregroundColor(interface.toolsColor)
+            }.foregroundStyle(interface.toolsColor)
                 .font(.title)
                 .padding(.bottom, 8)
             

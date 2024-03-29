@@ -40,7 +40,7 @@ struct KeyView: View {
                 }.padding(.top, 50)
                 
                 CustomSecureField(backColor: $interface.backColor, password: $theKey)
-                    .foregroundColor(.blue)
+                    .foregroundStyle(.blue)
                     .textFieldStyle(CustomTextFieldStyle())
                     .padding(.top, 50)
                     .padding(.horizontal, 8)

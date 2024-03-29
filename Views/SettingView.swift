@@ -45,7 +45,7 @@ struct SettingView: View {
                         Button(action: {showKey = true}) {
                             Text("Enter key").padding(15)
                         }
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                         .background(RoundedRectangle(cornerRadius: 12).fill(.pink))
                         Spacer()
                     }

@@ -85,7 +85,7 @@ struct MainView: View {
                         .font(Font.custom("Didot-Italic", size: 17))
                         .frame(width: 88, height: 88)
                         .offset(y: -6)
-                        .foregroundColor(interface.textColor)
+                        .foregroundStyle(interface.textColor)
                         .background(isPressed ? interface.copyColor : interface.questionColor)
                         .animation(.easeInOut(duration: 0.2)
                             .reverse(on: $isPressed, delay: 0.2), value: isPressed)
@@ -113,11 +113,11 @@ struct MainView: View {
                     .font(.callout)
                     .padding(.all, 10)
                     .scrollContentBackground(.hidden)
-                    .foregroundColor(interface.textColor)
+                    .foregroundStyle(interface.textColor)
                     .background(interface.questionColor)
                     .overlay(
                         Text("Type here first...")
-                            .foregroundColor(.black)
+                            .foregroundStyle(.black)
                             .opacity(text.isEmpty && !focusValue ? 1 : 0)
                             .onTapGesture {
                                 focusValue = true
