@@ -9,6 +9,12 @@ import Foundation
 import SwiftUI
 import GoogleGenerativeAI
 
+/*
+ 
+ using Google Swift GoogleGenerativeAI library, how to check for usage limit using SwiftUI
+ 
+ 
+ */
 
 @Observable class AiManager {
     
@@ -19,7 +25,7 @@ import GoogleGenerativeAI
     var haveResponse = false
 
     var selectedMode: ModeType = .chat
-    var googleModel = "gemini-1.0-pro-latest"   //"gemini-1.0-pro"
+    var modelName = "gemini-1.0-pro-latest"   //"gemini-1.0-pro"
     var config = GenerationConfig(maxOutputTokens: 1000)
     
     @ObservationIgnored var client = GenerativeModel(name: "gemini-1.0-pro-latest", apiKey: "", generationConfig: GenerationConfig(maxOutputTokens: 1000))
@@ -27,21 +33,21 @@ import GoogleGenerativeAI
     init() {
         let apikey = StoreService.getKey() ?? ""
         self.config = StoreService.getModelConfig()
-        client = GenerativeModel(name: googleModel, apiKey: apikey, generationConfig: config)
+        client = GenerativeModel(name: modelName, apiKey: apikey, generationConfig: config)
     }
     
     func updateModel() {
         let apikey = StoreService.getKey() ?? ""
         switch selectedMode {
             case .chat:
-                client = GenerativeModel(name: googleModel, apiKey: apikey, generationConfig: config)
+                client = GenerativeModel(name: modelName, apiKey: apikey, generationConfig: config)
             case .image, .camera:
                 client = GenerativeModel(name: "gemini-1.0-pro-vision-latest", apiKey: apikey, generationConfig: config)
         }
     }
     
     func updateClientKey(_ apikey: String) {
-        client = GenerativeModel(name: googleModel, apiKey: apikey, generationConfig: config)
+        client = GenerativeModel(name: modelName, apiKey: apikey, generationConfig: config)
     }
     
     func getResponse(from text: String, images: [UIImage] = []) async {

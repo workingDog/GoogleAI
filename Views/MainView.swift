@@ -17,7 +17,7 @@ struct MainView: View {
     @State private var text = ""
     @State private var isThinking = false
     @State private var isPressed = false
-    
+
     @FocusState.Binding var focusValue: Bool
     
     @State private var showPhotoPicker = false
@@ -93,6 +93,12 @@ struct MainView: View {
 
                     if isThinking {
                         ProgressView().progressViewStyle(IconRotateStyle()).offset(y: 24)
+//                        Image(systemName: "gear.circle")
+//                         .resizable()
+//                         .foregroundStyle(interface.toolsColor.opacity(0.4))
+//                        .frame(width: 88, height: 88)
+//                        .rotationEffect(Angle(degrees: isPressed ? 360 : 0))
+//                        .animation(Animation.linear(duration: 3).repeatForever(autoreverses: false), value: isPressed)
                     }
                 }
             }

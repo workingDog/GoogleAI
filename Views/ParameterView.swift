@@ -10,6 +10,7 @@ import SwiftUI
 import GoogleGenerativeAI
 
 
+// just to make things easier in ParameterView sliders etc...
 struct PlainConfig: Codable, Equatable {
     var temperature: Float = 0.3
     var topP: Float = 0.95
@@ -79,16 +80,6 @@ struct ParameterView: View {
                 Slider(value: $config.topK, in: 1...10, step: 1)
             }
 
-//            HStack {
-//                Text("Max images")
-//                Picker("", selection: $aiManager.numImages) {
-//                    ForEach(1..<6) { n in
-//                        Text("\(n)").tag(n)
-//                    }
-//                }.pickerStyle(.automatic).frame(width: 80)
-//                Spacer()
-//            }
-            
             HStack {
                 Picker("", selection: $interface.kwuiklang) {
                     Text(verbatim: "English").tag("en")
