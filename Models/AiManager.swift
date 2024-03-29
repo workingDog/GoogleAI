@@ -63,10 +63,9 @@ import GoogleGenerativeAI
     }
 
     func getVision(from text: String, images: [UIImage]) async {
-        var tempVar = [any ThrowingPartsRepresentable]()
-        tempVar.append(contentsOf: images)
+        let imagesParts: [any ThrowingPartsRepresentable] = images
         do {
-            let results = try await client.generateContent(text, tempVar)
+            let results = try await client.generateContent(text, imagesParts)
             if let output = results.text {
                 conversations.last?.answers.append(Answer(text: output, uimage: images))
             } else {
@@ -102,5 +101,3 @@ import GoogleGenerativeAI
     }
 
 }
-
-
