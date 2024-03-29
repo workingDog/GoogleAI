@@ -22,7 +22,7 @@ struct MainView: View {
     
     @State private var showPhotoPicker = false
     @State private var showCamera = false
-    @State private var selectedImages: [UIImage] = []
+    @State private var selectedImages: [ImageItem] = []
     @State private var photoItems: [PhotosPickerItem] = []
     
     var body: some View {
@@ -40,11 +40,11 @@ struct MainView: View {
         .onChange(of: photoItems) {
             if !photoItems.isEmpty {
                 Task {
-                    var tempArr: [UIImage] = []
+                    var tempArr: [ImageItem] = []
                     for item in photoItems {
                         if let data = try? await item.loadTransferable(type: Data.self),
                            let uiimg = UIImage(data: data) {
-                            tempArr.append(uiimg)
+                            tempArr.append(ImageItem(uimage: uiimg))
                         }
                     }
                     selectedImages = tempArr  // update selectedImages only once

@@ -34,19 +34,18 @@ struct RightBubbleView: View {
                     .padding(.all, 10)
                     .background(interface.answerColor)
             } else {
-                if let answer = converse.answers.first {
-                    Text(answer.text)
-                        .padding(.all, 15)
-                        .foregroundStyle(interface.textColor)
-                        .background(isPressed ? interface.copyColor : interface.answerColor)
-                        .onTapGesture {
-                            UIPasteboard.general.string = answer.text
-                            isPressed.toggle()
-                        }
-                        .animation(.easeInOut(duration: 0.2)
-                            .reverse(on: $isPressed, delay: 0.2), value: isPressed)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                }
+                Text(converse.answer.text)
+                    .padding(.all, 15)
+                    .foregroundStyle(interface.textColor)
+                    .background(isPressed ? interface.copyColor : interface.answerColor)
+                    .onTapGesture {
+                        UIPasteboard.general.string = converse.answer.text
+                        aiManager.shareThis(.text, info: converse.answer.text)
+                        isPressed.toggle()
+                    }
+                    .animation(.easeInOut(duration: 0.1)
+                        .reverse(on: $isPressed, delay: 0.1), value: isPressed)
+                    .frame(alignment: .leading)
             }
         }
     }

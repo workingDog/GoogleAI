@@ -14,7 +14,6 @@
 		C738A90329E4391E009E9494 /* AiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C738A8E329E4391E009E9494 /* AiManager.swift */; };
 		C738A90429E4391E009E9494 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C738A8E429E4391E009E9494 /* Utility.swift */; };
 		C738A90529E4391E009E9494 /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C738A8E529E4391E009E9494 /* StoreService.swift */; };
-		C738A90629E4391E009E9494 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C738A8E629E4391E009E9494 /* ShareSheet.swift */; };
 		C738A90729E4391E009E9494 /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = C738A8E729E4391E009E9494 /* License.txt */; };
 		C738A90A29E4391E009E9494 /* ParameterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C738A8EC29E4391E009E9494 /* ParameterView.swift */; };
 		C738A90B29E4391E009E9494 /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C738A8ED29E4391E009E9494 /* KeyView.swift */; };
@@ -48,7 +47,6 @@
 		C738A8E329E4391E009E9494 /* AiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AiManager.swift; sourceTree = "<group>"; };
 		C738A8E429E4391E009E9494 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		C738A8E529E4391E009E9494 /* StoreService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
-		C738A8E629E4391E009E9494 /* ShareSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		C738A8E729E4391E009E9494 /* License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
 		C738A8EC29E4391E009E9494 /* ParameterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterView.swift; sourceTree = "<group>"; };
 		C738A8ED29E4391E009E9494 /* KeyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
@@ -133,7 +131,6 @@
 				C738A8E329E4391E009E9494 /* AiManager.swift */,
 				C738A8E429E4391E009E9494 /* Utility.swift */,
 				C738A8E529E4391E009E9494 /* StoreService.swift */,
-				C738A8E629E4391E009E9494 /* ShareSheet.swift */,
 				C797CA1F2B9D1C1500FDB525 /* InterfaceManager.swift */,
 			);
 			path = Models;
@@ -277,7 +274,6 @@
 				C738A91329E4391E009E9494 /* KeychainInterface.swift in Sources */,
 				C7CE2BD72A2EEAEF00BB552B /* SimpleBubble.swift in Sources */,
 				C797CA202B9D1C1500FDB525 /* InterfaceManager.swift in Sources */,
-				C738A90629E4391E009E9494 /* ShareSheet.swift in Sources */,
 				C738A90F29E4391E009E9494 /* ChatBubbleShape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

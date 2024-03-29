@@ -17,7 +17,6 @@ struct ContentView: View {
     @Environment(InterfaceManager.self) var interface
     
     @State private var showSettings = false
-    @State private var showShareSheet = false
 
     @FocusState var focusValue: Bool
     
@@ -41,17 +40,7 @@ struct ContentView: View {
                 .environment(aiManager)
                 .environment(interface)
         }
-        .sheet(isPresented: $showShareSheet) {
-            if let txt = aiManager.selectedConversation?.answers.compactMap({$0.text}).first {
-                ShareSheet(activityItems: [txt])
-            } else {
-                if let imgages = aiManager.selectedConversation?.answers.compactMap({$0.uimage}) {
-                    ShareSheet(activityItems: imgages)
-                } else {
-                    ShareSheet(activityItems: ["nothing to share"])
-                }
-            }
-        }
+        
         // todo save the info/chat history when going into background
 //        .onChange(of: scenePhase) {
 //            switch scenePhase {
@@ -108,9 +97,39 @@ struct ContentView: View {
             Button(action: { aiManager.conversations.removeAll() }) {
                 Image(systemName: "trash")
             }
-            Button(action: { showShareSheet = true }) {
-                Image(systemName:"square.and.arrow.up")
-            }
+            shareLinkView()
+        }
+    }
+    
+    func getShareTitle() -> String {
+        if let txt = aiManager.shareItem as? String {
+            return txt
+        } else {
+            return "nothing to share"
+        }
+    }
+    
+    func getShareImage() -> Image {
+        if let image = aiManager.shareItem as? UIImage {
+            return Image(uiImage: image)
+        } else {
+            return Image(systemName: "")  // <-- todo
+        }
+    }
+    
+    @ViewBuilder
+    func shareLinkView() -> some View {
+        Group {
+            switch aiManager.shareType {
+                case .text:
+                    ShareLink(item: getShareTitle()) {
+                        Image(systemName:"square.and.arrow.up")
+                    }
+                case .image:
+                    ShareLink(item: getShareImage(), preview: SharePreview("picture", image: getShareImage())) {
+                        Image(systemName:"square.and.arrow.up")
+                    }
+                }
         }
     }
     

@@ -18,29 +18,38 @@ struct CompletionView: View {
     @State private var txtIsPressed = false
     @State private var imgIsPressed = false
     
-    @ViewBuilder func txtView(_ converse: Conversation) -> some View {
+    @State private var selectedImg = ImageItem(uimage: UIImage())
+    
+    @ViewBuilder
+    func txtView(_ converse: Conversation) -> some View {
         Text(converse.question.text)
             .padding(.all, 10)
             .foregroundStyle(txtIsPressed && (aiManager.selectedConversation?.id == converse.id) ? interface.copyColor : interface.textColor)
             .onTapGesture {
                 UIPasteboard.general.string = converse.question.text
+                aiManager.shareThis(.text, info: converse.question.text)
+                aiManager.selectedConversation = converse
                 txtIsPressed.toggle()
             }
     }
     
-    @ViewBuilder func imgView(_ converse: Conversation) -> some View {
+    @ViewBuilder
+    func imgView(_ converse: Conversation) -> some View {
         ScrollView(.horizontal) {
             HStack {
-                ForEach(converse.question.uimage, id: \.self) { image in
-                    Image(uiImage: image)
+                ForEach(converse.question.images) { image in
+                    Image(uiImage: image.uimage)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: 333, maxHeight: 333)
-                        .border(imgIsPressed ? interface.copyColor : interface.textColor, width: 4)
+                        .border(imgIsPressed && (selectedImg.id == image.id) ? interface.copyColor : interface.textColor, width: 4)
                         .padding(8)
                         .onTapGesture {
-                            UIPasteboard.general.image = image
+                            UIPasteboard.general.image = image.uimage
+                            aiManager.shareThis(.image, info: image.uimage)
+                            aiManager.selectedConversation = converse
                             imgIsPressed.toggle()
+                            selectedImg = image
                         }
                 }
             }
@@ -64,13 +73,14 @@ struct CompletionView: View {
                             .onTapGesture {
                                 UIPasteboard.general.string = converse.question.text
                                 aiManager.selectedConversation = converse
+                                aiManager.shareThis(.text, info: converse.question.text)
                                 txtIsPressed.toggle()
                             }
                         }
-                        .animation(.easeInOut(duration: 0.2)
-                            .reverse(on: $imgIsPressed, delay: 0.2), value: imgIsPressed)
-                        .animation(.easeInOut(duration: 0.2)
-                            .reverse(on: $txtIsPressed, delay: 0.2), value: txtIsPressed)
+                        .animation(.easeInOut(duration: 0.1)
+                            .reverse(on: $imgIsPressed, delay: 0.1), value: imgIsPressed)
+                        .animation(.easeInOut(duration: 0.1)
+                            .reverse(on: $txtIsPressed, delay: 0.1), value: txtIsPressed)
                         
                         RightBubbleView(converse: converse, isThinking: $isThinking)
                     }

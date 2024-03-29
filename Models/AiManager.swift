@@ -9,12 +9,6 @@ import Foundation
 import SwiftUI
 import GoogleGenerativeAI
 
-/*
- 
- using Google Swift GoogleGenerativeAI library, how to check for usage limit using SwiftUI
- 
- 
- */
 
 @Observable class AiManager {
     
@@ -23,6 +17,9 @@ import GoogleGenerativeAI
     
     var errorDetected = false
     var haveResponse = false
+    
+    var shareType: CopyType = .text
+    var shareItem: Any = "nothing to share"
 
     var selectedMode: ModeType = .chat
     var modelName = "gemini-1.0-pro-latest"   //"gemini-1.0-pro"
@@ -34,6 +31,11 @@ import GoogleGenerativeAI
         let apikey = StoreService.getKey() ?? ""
         self.config = StoreService.getModelConfig()
         client = GenerativeModel(name: modelName, apiKey: apikey, generationConfig: config)
+    }
+    
+    func shareThis(_ copyType: CopyType, info: Any) {
+        shareType = copyType
+        shareItem = info
     }
     
     func updateModel() {
@@ -50,10 +52,10 @@ import GoogleGenerativeAI
         client = GenerativeModel(name: modelName, apiKey: apikey, generationConfig: config)
     }
     
-    func getResponse(from text: String, images: [UIImage] = []) async {
+    func getResponse(from text: String, images: [ImageItem] = []) async {
 
-        conversations.append(Conversation(question: Question(text: text, uimage: images),
-                                          answers: [],
+        conversations.append(Conversation(question: InfoItem(text: text, images: images),
+                                          answer: InfoItem(text: "", images: []),
                                           history: conversations.last?.history ?? []))
         
         errorDetected = false
@@ -68,12 +70,12 @@ import GoogleGenerativeAI
         }
     }
 
-    func getVision(from text: String, images: [UIImage]) async {
-        let imagesParts: [any ThrowingPartsRepresentable] = images
+    func getVision(from text: String, images: [ImageItem]) async {
+        let imagesParts: [any ThrowingPartsRepresentable] = images.map{$0.uimage}
         do {
             let results = try await client.generateContent(text, imagesParts)
             if let output = results.text {
-                conversations.last?.answers.append(Answer(text: output, uimage: images))
+                conversations.last?.answer = InfoItem(text: output, images: images)
             } else {
                 errorDetected = true
             }
@@ -94,7 +96,7 @@ import GoogleGenerativeAI
                 results = try await client.generateContent(text)
             }
             if let output = results.text {
-                conversations.last?.answers.append(Answer(text: output, uimage: []))
+                conversations.last?.answer = InfoItem(text: output, images: [])
                 conversations.last?.history.append(ModelContent(role: "user", parts: text))
                 conversations.last?.history.append(ModelContent(role: "model", parts: output))
             } else {

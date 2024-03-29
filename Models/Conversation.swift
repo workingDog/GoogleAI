@@ -10,30 +10,30 @@ import SwiftUI
 import GoogleGenerativeAI
 
 
-struct Answer: Identifiable, Hashable {
+
+struct ImageItem: Identifiable, Hashable {
     let id = UUID()
-    var text: String
-    var uimage: [UIImage]
+    var uimage: UIImage
 }
 
-struct Question: Identifiable, Hashable {
+struct InfoItem: Identifiable, Hashable {
     let id = UUID()
     var text: String
-    var uimage: [UIImage]
+    var images: [ImageItem]
 }
 
 @Observable class Conversation: Identifiable {
     let id = UUID()
-    var question: Question
-    var answers: [Answer]
+    var question: InfoItem
+    var answer: InfoItem
     var history: [ModelContent]
     
-    init(question: Question = Question(text: "", uimage: []),
-         answers: [Answer] = [],
+    init(question: InfoItem = InfoItem(text: "", images: []),
+         answer: InfoItem = InfoItem(text: "", images: []),
          history: [ModelContent] = []) {
         
         self.question = question
-        self.answers = answers
+        self.answer = answer
         self.history = history
     }
 }
