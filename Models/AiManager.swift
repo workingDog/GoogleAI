@@ -65,9 +65,7 @@ import GoogleGenerativeAI
             case .image, .camera: await getVision(from: text, images: images)
         }
         
-        DispatchQueue.main.async {
-            self.haveResponse.toggle()
-        }
+        haveResponse.toggle()
     }
 
     func getVision(from text: String, images: [ImageItem]) async {

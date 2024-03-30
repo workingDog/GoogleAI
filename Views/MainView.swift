@@ -40,14 +40,17 @@ struct MainView: View {
         .onChange(of: photoItems) {
             if !photoItems.isEmpty {
                 Task {
-                    var tempArr: [ImageItem] = []
+                    var tempArr: [UIImage] = []
                     for item in photoItems {
                         if let data = try? await item.loadTransferable(type: Data.self),
                            let uiimg = UIImage(data: data) {
-                            tempArr.append(ImageItem(uimage: uiimg))
+                            tempArr.append(uiimg)
                         }
                     }
-                    selectedImages = tempArr  // update selectedImages only once
+                    // reduce the size of the images
+                    let smallerImg = tempArr.compactMap{$0.resizeImageTo(size: CGSize(width: 333, height: 333))}
+                    // update selectedImages only once
+                    selectedImages = smallerImg.map{ImageItem(uimage: $0)}
                     photoItems.removeAll()
                 }
             }

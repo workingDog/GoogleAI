@@ -101,7 +101,7 @@ struct ContentView: View {
         }
     }
     
-    func getShareTitle() -> String {
+    func getShareText() -> String {
         if let txt = aiManager.shareItem as? String {
             return txt
         } else {
@@ -116,13 +116,13 @@ struct ContentView: View {
             return Image(systemName: "")  // <-- todo
         }
     }
-    
+
     @ViewBuilder
     func shareLinkView() -> some View {
         Group {
             switch aiManager.shareType {
                 case .text:
-                    ShareLink(item: getShareTitle()) {
+                    ShareLink(item: getShareText()) {
                         Image(systemName:"square.and.arrow.up")
                     }
                 case .image:
