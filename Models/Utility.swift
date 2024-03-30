@@ -23,22 +23,21 @@ extension UIImage {
     
     func resizeWithRatio(size: CGSize) -> UIImage {
         // the scale factor that preserves aspect ratio
-        let widthRatio = size.width / size.width
-        let heightRatio = size.height / size.height
-        
-        let scaleFactor = min(widthRatio, heightRatio)
-        
+        let widthRatio = size.width / self.size.width
+        let heightRatio = size.height / self.size.height
+        let scale = min(widthRatio, heightRatio)
+
         // the new image size that preserves aspect ratio
-        let scaledImageSize = CGSize(width: size.width * scaleFactor,height: size.height * scaleFactor)
+        let newSize = CGSize(width: self.size.width * scale, height: self.size.height * scale)
         
         // the resized UIImage
-        let renderer = UIGraphicsImageRenderer(size: scaledImageSize)
+        let renderer = UIGraphicsImageRenderer(size: newSize)
         // draw it
-        let scaledImage = renderer.image { _ in
-            self.draw(in: CGRect(origin: .zero,size: scaledImageSize))
+        let newImage = renderer.image { _ in
+            self.draw(in: CGRect(origin: .zero, size: newSize))
         }
         
-        return scaledImage
+        return newImage
     }
     
 }

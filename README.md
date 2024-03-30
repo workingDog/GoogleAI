@@ -17,16 +17,16 @@ Using, the **Google AI SDK for Swift** Client Library in Swift [Google AI SDK fo
 then type a question **before** you tap on the main button.
 
     - `Chat` for chat like interaction,
-    - `Image` for selecting an image from the Photos library,
-    - `Camera` to take a picture using the camera.
+    - `Image` for selecting one or more images from the Photos library,
+    - `Camera` to take one picture using the camera.
     
--   **Tap** on a question or answer text, to **copy** the text to the `Pasteboard` and enable you to paste it elsewhere. Similarly, tap on the picture to copy just the image.
+-   **Tap** on a question or answer text, to **copy** the text to the `Pasteboard` and enable you to paste it elsewhere or `share` it. Similarly, tap on the picture to copy just the image.
   
 -   **Swipe left** on a question/answer, to deleted it.
   
 -   **Tap** on the `trash can`, to delete **all** questions and answers. 
 
--   **Tap** on the `share`, to share the previously tapped answer. 
+-   **Tap** on the `share`, to share the previously tapped text or picture. 
 
 
 #### Settings
