@@ -37,22 +37,20 @@ struct MainView: View {
             }
         }
         .photosPicker(isPresented: $showPhotoPicker, selection: $photoItems)
-        .onChange(of: photoItems) {
+        .task(id: photoItems) { // <-- like .onChange
             if !photoItems.isEmpty {
-                Task {
-                    var tempArr: [UIImage] = []
-                    for item in photoItems {
-                        if let data = try? await item.loadTransferable(type: Data.self),
-                           let uiimg = UIImage(data: data) {
-                            tempArr.append(uiimg)
-                        }
+                var tempArr: [UIImage] = []
+                for item in photoItems {
+                    if let data = try? await item.loadTransferable(type: Data.self),
+                       let uiimg = UIImage(data: data) {
+                        tempArr.append(uiimg)
                     }
-                    // reduce the size of the images
-                    let smallerImg = tempArr.compactMap{$0.resizeImageTo(size: CGSize(width: 333, height: 333))}
-                    // update selectedImages only once
-                    selectedImages = smallerImg.map{ImageItem(uimage: $0)}
-                    photoItems.removeAll()
                 }
+                // reduce the size of the images
+                let smallerImg = tempArr.compactMap{$0.resizeImageTo(size: CGSize(width: 333, height: 333))}
+                // update/onChange selectedImages only once
+                selectedImages = smallerImg.map{ImageItem(uimage: $0)}
+                photoItems.removeAll()
             }
         }
         .alert("No results available", isPresented: $aiManager.errorDetected) {
@@ -132,7 +130,7 @@ struct MainView: View {
     
     func doAsk() {
         isThinking = true
-        Task { @MainActor in   // <--- do task on the main thread
+        Task {
             if !text.trimmingCharacters(in: .whitespaces).isEmpty {
                 if !selectedImages.isEmpty, aiManager.selectedMode != .chat {
                     await aiManager.getResponse(from: text, images: selectedImages)

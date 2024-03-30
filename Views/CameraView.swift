@@ -22,9 +22,7 @@ struct CameraView: UIViewControllerRepresentable {
         return imagePicker
     }
     
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
-        
-    }
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) { }
     
     func makeCoordinator() -> Coordinator {
         return Coordinator(picker: self)
