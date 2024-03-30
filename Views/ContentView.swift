@@ -101,35 +101,20 @@ struct ContentView: View {
         }
     }
     
-    func getShareText() -> String {
-        if let txt = aiManager.shareItem as? String {
-            return txt
-        } else {
-            return "nothing to share"
-        }
-    }
-    
-    func getShareImage() -> Image {
-        if let image = aiManager.shareItem as? UIImage {
-            return Image(uiImage: image)
-        } else {
-            return Image(systemName: "")  // <-- todo
-        }
-    }
-
     @ViewBuilder
     func shareLinkView() -> some View {
         Group {
-            switch aiManager.shareType {
-                case .text:
-                    ShareLink(item: getShareText()) {
-                        Image(systemName:"square.and.arrow.up")
-                    }
-                case .image:
-                    ShareLink(item: getShareImage(), preview: SharePreview("picture", image: getShareImage())) {
-                        Image(systemName:"square.and.arrow.up")
-                    }
+            if let image = aiManager.shareItem as? UIImage {
+                let img = Image(uiImage: image)
+                ShareLink(item: img, preview: SharePreview("picture", image: img)) {
+                    Image(systemName:"square.and.arrow.up")
                 }
+            } else {
+                let txt = aiManager.shareItem as? String ?? "nothing to share"
+                ShareLink(item: txt) {
+                    Image(systemName:"square.and.arrow.up")
+                }
+            }
         }
     }
     

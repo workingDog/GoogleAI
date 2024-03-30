@@ -40,7 +40,7 @@ struct RightBubbleView: View {
                     .background(isPressed ? interface.copyColor : interface.answerColor)
                     .onTapGesture {
                         UIPasteboard.general.string = converse.answer.text
-                        aiManager.shareThis(.text, info: converse.answer.text)
+                        aiManager.shareItem = converse.answer.text
                         isPressed.toggle()
                     }
                     .animation(.easeInOut(duration: 0.1)

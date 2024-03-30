@@ -27,7 +27,7 @@ struct CompletionView: View {
             .foregroundStyle(txtIsPressed && (aiManager.selectedConversation?.id == converse.id) ? interface.copyColor : interface.textColor)
             .onTapGesture {
                 UIPasteboard.general.string = converse.question.text
-                aiManager.shareThis(.text, info: converse.question.text)
+                aiManager.shareItem = converse.question.text
                 aiManager.selectedConversation = converse
                 txtIsPressed.toggle()
             }
@@ -46,7 +46,7 @@ struct CompletionView: View {
                         .padding(8)
                         .onTapGesture {
                             UIPasteboard.general.image = image.uimage
-                            aiManager.shareThis(.image, info: image.uimage)
+                            aiManager.shareItem = image.uimage
                             aiManager.selectedConversation = converse
                             imgIsPressed.toggle()
                             selectedImg = image
@@ -73,7 +73,7 @@ struct CompletionView: View {
                             .onTapGesture {
                                 UIPasteboard.general.string = converse.question.text
                                 aiManager.selectedConversation = converse
-                                aiManager.shareThis(.text, info: converse.question.text)
+                                aiManager.shareItem = converse.question.text
                                 txtIsPressed.toggle()
                             }
                         }

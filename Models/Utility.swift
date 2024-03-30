@@ -74,10 +74,6 @@ enum ModeType: String, CaseIterable {
     case image, chat, camera
 }
 
-enum CopyType: String, CaseIterable {
-    case image, text
-}
-
 extension Animation {
     func reverse(on: Binding<Bool>, delay: Double) -> Self {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {

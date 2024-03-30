@@ -17,8 +17,7 @@ import GoogleGenerativeAI
     
     var errorDetected = false
     var haveResponse = false
-    
-    var shareType: CopyType = .text
+
     var shareItem: Any = "nothing to share"
 
     var selectedMode: ModeType = .chat
@@ -32,12 +31,7 @@ import GoogleGenerativeAI
         self.config = StoreService.getModelConfig()
         client = GenerativeModel(name: modelName, apiKey: apikey, generationConfig: config)
     }
-    
-    func shareThis(_ copyType: CopyType, info: Any) {
-        shareType = copyType
-        shareItem = info
-    }
-    
+
     func updateModel() {
         let apikey = StoreService.getKey() ?? ""
         switch selectedMode {
