@@ -73,7 +73,7 @@ struct MainView: View {
             Button(action: {
                 isPressed.toggle()
                 focusValue = false
-                if !text.trimmingCharacters(in: .whitespaces).isEmpty {
+                if !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                     switch aiManager.selectedMode {
                         case .camera: showCamera = true
                         case .image: showPhotoPicker = true
@@ -133,7 +133,7 @@ struct MainView: View {
     func doAsk() {
         isThinking = true
         Task {
-            if !text.trimmingCharacters(in: .whitespaces).isEmpty {
+            if !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 if !selectedImages.isEmpty, aiManager.selectedMode != .chat {
                     await aiManager.getResponse(from: text, images: selectedImages)
                 } else {

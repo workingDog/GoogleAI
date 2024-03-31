@@ -17,7 +17,6 @@ struct ContentView: View {
     @Environment(InterfaceManager.self) var interface
     
     @State private var showSettings = false
-
     @FocusState var focusValue: Bool
     
     
@@ -110,9 +109,9 @@ struct ContentView: View {
     @ViewBuilder
     func shareLinkView() -> some View {
         Group {
-            if let image = aiManager.shareItem as? UIImage {
-                let img = Image(uiImage: image)
-                ShareLink(item: img, preview: SharePreview("picture", image: img)) {
+            if let uiimg = aiManager.shareItem as? UIImage {
+                let image = Image(uiImage: uiimg)
+                ShareLink(item: image, preview: SharePreview("picture", image: image)) {
                     Image(systemName:"square.and.arrow.up")
                 }
             } else {
