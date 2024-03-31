@@ -18,17 +18,18 @@ struct CompletionView: View {
     @State private var txtIsPressed = false
     @State private var imgIsPressed = false
     
-    @State private var selectedId = UUID()
+    @State private var selectedConverseId = UUID()
+    @State private var selecteImagedId = UUID()
     
     @ViewBuilder
     func txtView(_ converse: Conversation) -> some View {
         Text(converse.question.text)
             .padding(.all, 10)
-            .foregroundStyle(txtIsPressed && (aiManager.selectedConversation?.id == converse.id) ? interface.copyColor : interface.textColor)
+            .foregroundStyle(txtIsPressed && (selectedConverseId == converse.id) ? interface.copyColor : interface.textColor)
             .onTapGesture {
                 UIPasteboard.general.string = converse.question.text
                 aiManager.shareItem = converse.question.text
-                aiManager.selectedConversation = converse
+                selectedConverseId = converse.id
                 txtIsPressed.toggle()
             }
     }
@@ -42,14 +43,14 @@ struct CompletionView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: 333, maxHeight: 333)
-                        .border(imgIsPressed && (selectedId == image.id) ? interface.copyColor : interface.textColor, width: 4)
+                        .border(imgIsPressed && (selecteImagedId == image.id) ? interface.copyColor : interface.textColor, width: 4)
                         .padding(8)
                         .onTapGesture {
                             UIPasteboard.general.image = image.uimage
                             aiManager.shareItem = image.uimage
-                            aiManager.selectedConversation = converse
+                            selectedConverseId = converse.id
+                            selecteImagedId = image.id
                             imgIsPressed.toggle()
-                            selectedId = image.id
                         }
                 }
             }
@@ -68,11 +69,11 @@ struct CompletionView: View {
                                 txtView(converse)
                                 imgView(converse)
                             }
-                            .background(txtIsPressed && (aiManager.selectedConversation?.id == converse.id) ? interface.copyColor : interface.questionColor)
+                            .background(txtIsPressed && (selectedConverseId == converse.id) ? interface.copyColor : interface.questionColor)
                             
                             .onTapGesture {
                                 UIPasteboard.general.string = converse.question.text
-                                aiManager.selectedConversation = converse
+                                selectedConverseId = converse.id
                                 aiManager.shareItem = converse.question.text
                                 txtIsPressed.toggle()
                             }
@@ -88,7 +89,7 @@ struct CompletionView: View {
                     .listRowBackground(interface.backColor)
                     .simultaneousGesture(TapGesture()
                         .onEnded {
-                            aiManager.selectedConversation = converse
+                            selectedConverseId = converse.id
                         })
                 }
                 .onDelete { index in

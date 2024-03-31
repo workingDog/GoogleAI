@@ -13,7 +13,6 @@ import GoogleGenerativeAI
 @Observable class AiManager {
     
     var conversations = [Conversation]()
-    var selectedConversation: Conversation?
     
     var errorDetected = false
     var haveResponse = false
