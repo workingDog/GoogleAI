@@ -13,16 +13,16 @@ import SwiftUI
 
 struct CustomSecureField: View {
     @Binding var backColor: Color
-    @State private var isPasswordVisible = false
     @Binding var password: String
-    var placeholder = ""
     
+    @State private var isPasswordVisible = false
+
     var body: some View {
         HStack(spacing: 12) {
             ZStack {
                 if password.isEmpty {
                     HStack {
-                        Text(placeholder)
+                        Text("")
                         Spacer()
                     }
                 }

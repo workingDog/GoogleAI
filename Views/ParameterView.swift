@@ -36,7 +36,6 @@ struct ParameterView: View {
     @Environment(InterfaceManager.self) var interface
     
     @State private var lang = "en" 
-    
     @State private var config = PlainConfig()
     
     var body: some View {

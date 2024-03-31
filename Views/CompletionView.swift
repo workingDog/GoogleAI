@@ -18,7 +18,7 @@ struct CompletionView: View {
     @State private var txtIsPressed = false
     @State private var imgIsPressed = false
     
-    @State private var selectedImg = ImageItem(uimage: UIImage())
+    @State private var selectedId = UUID()
     
     @ViewBuilder
     func txtView(_ converse: Conversation) -> some View {
@@ -42,14 +42,14 @@ struct CompletionView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: 333, maxHeight: 333)
-                        .border(imgIsPressed && (selectedImg.id == image.id) ? interface.copyColor : interface.textColor, width: 4)
+                        .border(imgIsPressed && (selectedId == image.id) ? interface.copyColor : interface.textColor, width: 4)
                         .padding(8)
                         .onTapGesture {
                             UIPasteboard.general.image = image.uimage
                             aiManager.shareItem = image.uimage
                             aiManager.selectedConversation = converse
                             imgIsPressed.toggle()
-                            selectedImg = image
+                            selectedId = image.id
                         }
                 }
             }

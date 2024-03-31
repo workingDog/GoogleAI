@@ -17,14 +17,8 @@ struct RightBubbleView: View {
     @Binding var isThinking: Bool
     
     @State private var isPressed = false
-    
-    let pace = 0.05
-    @State private var letters: [String] = []
-    @State private var displayText = ""
-    @State private var animating = false
-    
+
     var body: some View {
-        
         ChatBubble(direction: .right) {
             //     RightBubble {
             if isThinking && (converse.id == aiManager.conversations.last?.id) {

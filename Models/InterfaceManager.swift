@@ -22,8 +22,6 @@ import Observation
     var selectedColor = ColorType.back
     
     var kwuiklang = "en"
-    
-    //@ObservationIgnored @AppStorage("isDarkMode")
     var isDarkMode = false
     
     

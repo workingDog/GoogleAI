@@ -64,9 +64,10 @@ struct ContentView: View {
                 modesButton
                 Spacer()
                 settingsButton
-            }.foregroundStyle(interface.toolsColor)
-                .font(.title)
-                .padding(.bottom, 8)
+            }
+            .foregroundStyle(interface.toolsColor)
+            .font(.title)
+            .padding(.bottom, 8)
             
             WavyLineView(height: 10.0, freq: 0.2, lineWidth: 2, lineLength: 333)
                 .offset(x: -10, y: 0)
@@ -80,10 +81,11 @@ struct ContentView: View {
             Image(systemName: "ellipsis.message").tag(ModeType.chat)
             Image(systemName: "photo").tag(ModeType.image)
             Image(systemName: "camera.shutter.button").tag(ModeType.camera)
-        }.pickerStyle(.segmented)
-            .foregroundStyle(interface.toolsColor, .blue)
-            .frame(width: 140)
-            .scaleEffect(1.3)
+        }
+        .pickerStyle(.segmented)
+        .foregroundStyle(interface.toolsColor, .blue)
+        .frame(width: 140)
+        .scaleEffect(1.3)
     }
 
     var settingsButton: some View {

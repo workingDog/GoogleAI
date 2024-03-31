@@ -11,8 +11,8 @@ import PhotosUI
 
 
 struct CameraView: UIViewControllerRepresentable {
-    @Binding var selectedImages: [ImageItem]
     @Environment(\.dismiss) var dismiss
+    @Binding var selectedImages: [ImageItem]
     
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let imagePicker = UIImagePickerController()

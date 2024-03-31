@@ -28,7 +28,8 @@ struct MainView: View {
     var body: some View {
         @Bindable var aiManager = aiManager
         ZStack {
-            Color.white.opacity(0.001).ignoresSafeArea(.all)
+            Color.white.opacity(0.001)
+                .ignoresSafeArea(.all)
                 .onTapGesture { focusValue = false }
             VStack(spacing: 1) {
                 inputView
@@ -37,7 +38,7 @@ struct MainView: View {
             }
         }
         .photosPicker(isPresented: $showPhotoPicker, selection: $photoItems)
-        .task(id: photoItems) { // <-- like .onChange
+        .task(id: photoItems) { 
             if !photoItems.isEmpty {
                 var tempArr: [UIImage] = []
                 for item in photoItems {
