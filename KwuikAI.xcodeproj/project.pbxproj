@@ -148,8 +148,8 @@
 		C738A8EB29E4391E009E9494 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C7FBCDD029E52A7A00C457BB /* MainView.swift */,
 				C738A8F329E4391E009E9494 /* ContentView.swift */,
+				C7FBCDD029E52A7A00C457BB /* MainView.swift */,
 				C738A8EC29E4391E009E9494 /* ParameterView.swift */,
 				C738A8F029E4391E009E9494 /* CompletionView.swift */,
 				C738A8ED29E4391E009E9494 /* KeyView.swift */,

@@ -56,6 +56,7 @@ struct ContentView: View {
 //        }
     }
 
+    @ViewBuilder
     var theToolbar: some View {
         VStack {
             HStack {
@@ -75,9 +76,10 @@ struct ContentView: View {
         }
     }
     
+    @ViewBuilder
     var modesButton: some View {
         @Bindable var aiManager = aiManager
-        return Picker("", selection: $aiManager.selectedMode) {
+        Picker("", selection: $aiManager.selectedMode) {
             Image(systemName: "ellipsis.message").tag(ModeType.chat)
             Image(systemName: "photo").tag(ModeType.image)
             Image(systemName: "camera.shutter.button").tag(ModeType.camera)
@@ -88,12 +90,14 @@ struct ContentView: View {
         .scaleEffect(1.3)
     }
 
+    @ViewBuilder
     var settingsButton: some View {
         Button(action: { showSettings = true }) {
             Image(systemName: "gearshape")
         }
     }
     
+    @ViewBuilder
     var leftButtons: some View {
         HStack (spacing: 10){
             Button(action: { aiManager.conversations.removeAll() }) {

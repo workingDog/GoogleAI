@@ -67,6 +67,7 @@ struct MainView: View {
         }
     }
     
+    @ViewBuilder
     var inputView: some View {
         VStack (spacing: 4) {
             Button(action: {
