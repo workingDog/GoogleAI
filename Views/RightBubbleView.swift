@@ -28,7 +28,7 @@ struct RightBubbleView: View {
                     .padding(.all, 10)
                     .background(interface.answerColor)
             } else {
-                Text(converse.answer.text.toMarkdown()) 
+                Text(LocalizedStringKey(converse.answer.text)) //<-- for markdown
                     .padding(.all, 15)
                     .foregroundStyle(interface.textColor)
                     .background(isPressed ? interface.copyColor : interface.answerColor)

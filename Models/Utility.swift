@@ -10,18 +10,6 @@ import SwiftUI
 import UIKit
 
 
-extension String {
-    
-    func toMarkdown() -> AttributedString {
-        do {
-            return try AttributedString(markdown: self, options: AttributedString.MarkdownParsingOptions(allowsExtendedAttributes: true, interpretedSyntax: .inlineOnlyPreservingWhitespace))
-        } catch {
-            return AttributedString(self)
-        }
-    }
-    
-}
-
 extension UIImage {
     
     func resizeImageTo(size: CGSize) -> UIImage? {
