@@ -17,10 +17,10 @@ struct RightBubbleView: View {
     @Binding var isThinking: Bool
     
     @State private var isPressed = false
-
+ 
     var body: some View {
         ChatBubble(direction: .right) {
-            //     RightBubble {
+           // RightBubble {
             if isThinking && (converse.id == aiManager.conversations.last?.id) {
                 ProgressView()
                     .progressViewStyle(IconRotateStyle())
@@ -28,7 +28,7 @@ struct RightBubbleView: View {
                     .padding(.all, 10)
                     .background(interface.answerColor)
             } else {
-                Text(converse.answer.text)
+                Text(converse.answer.text.toMarkdown()) 
                     .padding(.all, 15)
                     .foregroundStyle(interface.textColor)
                     .background(isPressed ? interface.copyColor : interface.answerColor)
@@ -44,8 +44,6 @@ struct RightBubbleView: View {
         }
     }
 }
-
-
 
 
 /*
