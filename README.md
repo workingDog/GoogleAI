@@ -41,7 +41,7 @@ Press the **gear shape** icon to:
 ### References
 
 -    [Google AI SDK for Swift](https://github.com/google/generative-ai-swift)
-
+-    [MarkdownUI](https://github.com/gonzalezreal/swift-markdown-ui)
 
 ### Requirement
 
