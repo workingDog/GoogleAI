@@ -131,9 +131,9 @@ struct MainView: View {
     }
     
     func doAsk() {
-        isThinking = true
         Task {
             if !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                isThinking = true
                 if !selectedImages.isEmpty, aiManager.selectedMode != .chat {
                     await aiManager.getResponse(from: text, images: selectedImages)
                 } else {

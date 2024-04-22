@@ -20,7 +20,7 @@ import GoogleGenerativeAI
     var shareItem: Any = "nothing to share"
 
     var selectedMode: ModeType = .chat
-    var modelName = "gemini-1.0-pro-latest"   //"gemini-1.0-pro"
+    var modelName = "gemini-1.0-pro-latest"   //"gemini-1.0-pro"  "gemini-1.0-pro-latest"
     var config = GenerationConfig(maxOutputTokens: 1000)
     
     @ObservationIgnored var client = GenerativeModel(name: "gemini-1.0-pro-latest", apiKey: "", generationConfig: GenerationConfig(maxOutputTokens: 1000))
