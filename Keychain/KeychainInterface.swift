@@ -7,39 +7,55 @@
 
 import Foundation
 
-// based on from: https://www.advancedswift.com/secure-private-data-keychain-swift/
+
+// based on: https://www.advancedswift.com/secure-private-data-keychain-swift/
 
 class KeychainInterface {
     
+    // set these with your own values
     static var service = "ringow.com.kwuikai.googleai"
     static var account = "ringow.kwuikai.apikey.googleai"
+    
 
-    enum KeychainError: Error {
-        // Attempted read for an item that does not exist.
-        case itemNotFound
-        
-        // Attempted save to override an existing item.
-        // Use update instead of save to update existing items
-        case duplicateItem
-        
-        // A read of an item in any format other than Data
-        case invalidItemFormat
-        
-        // Any operation result status than errSecSuccess
-        case unexpectedStatus(OSStatus)
+    //------ convenience for api ---------------------------------
+    
+    static func getKey() -> String? {
+        getPassword()
+    }
+    
+    static func setKey(key: String) {
+        do {
+            try savePassword(key)
+        } catch {
+            print("setKey(): \(error)")
+        }
+    }
+    
+    static func updateKey(key: String) {
+        do {
+            try updatePassword(with: key)
+        } catch {
+            print("updateKey(): \(error)")
+        }
+    }
+    
+    static func deleteKey() {
+        do {
+            try deletePassword()
+        } catch {
+            print("deleteKey: \(error)")
+        }
     }
 
+    //------ convenience for password ----------------------------
+    
     static func savePassword(_ password: String) throws {
-        try KeychainInterface.save(password: password.data(using: .utf8)!,
-                                   service: KeychainInterface.service,
-                                   account: KeychainInterface.account)
+        try save(password: password.data(using: .utf8)!, service: service, account: account)
     }
     
     static func getPassword() -> String? {
         do {
-            let data = try KeychainInterface.readPassword(
-                service: KeychainInterface.service,
-                account: KeychainInterface.account)
+            let data = try readPassword(service: service, account: account)
             let str = String(data: data, encoding: .utf8)
             return str
         } catch {
@@ -49,22 +65,26 @@ class KeychainInterface {
     
     static func updatePassword(with password: String) throws {
         let data = password.data(using: .utf8)!
-        try KeychainInterface.update(password: data,
-                                     service: KeychainInterface.service,
-                                     account: KeychainInterface.account)
+        try update(password: data, service: service, account: account)
     }
+    
+    static func deletePassword() throws {
+        try deletePassword(service: service, account: account)
+    }
+    
+    //--------------- general functions ---------------------------------
     
     static func save(password: Data, service: String, account: String) throws {
         
-        let query: [String: AnyObject] = [
+        let query: [CFString: Any] = [
             // kSecAttrService,  kSecAttrAccount, and kSecClass
             // uniquely identify the item to save in Keychain
-            kSecAttrService as String: service as AnyObject,
-            kSecAttrAccount as String: account as AnyObject,
-            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService: service,
+            kSecAttrAccount: account,
+            kSecClass: kSecClassGenericPassword,
             
             // kSecValueData is the item value to save
-            kSecValueData as String: password as AnyObject
+            kSecValueData: password
         ]
         
         // SecItemAdd attempts to add the item identified by
@@ -85,20 +105,20 @@ class KeychainInterface {
             throw KeychainError.unexpectedStatus(status)
         }
     }
-
+    
     static func update(password: Data, service: String, account: String) throws {
-        let query: [String: AnyObject] = [
+        let query: [CFString: Any] = [
             // kSecAttrService,  kSecAttrAccount, and kSecClass
             // uniquely identify the item to update in Keychain
-            kSecAttrService as String: service as AnyObject,
-            kSecAttrAccount as String: account as AnyObject,
-            kSecClass as String: kSecClassGenericPassword
+            kSecAttrService: service,
+            kSecAttrAccount: account,
+            kSecClass: kSecClassGenericPassword
         ]
         
         // attributes is passed to SecItemUpdate with
         // kSecValueData as the updated item value
-        let attributes: [String: AnyObject] = [
-            kSecValueData as String: password as AnyObject
+        let attributes: [CFString: Any] = [
+            kSecValueData: password
         ]
         
         // SecItemUpdate attempts to update the item identified
@@ -121,20 +141,20 @@ class KeychainInterface {
     }
     
     static func readPassword(service: String, account: String) throws -> Data {
-        let query: [String: AnyObject] = [
+        let query: [CFString: Any] = [
             // kSecAttrService,  kSecAttrAccount, and kSecClass
             // uniquely identify the item to read in Keychain
-            kSecAttrService as String: service as AnyObject,
-            kSecAttrAccount as String: account as AnyObject,
-            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService: service,
+            kSecAttrAccount: account,
+            kSecClass: kSecClassGenericPassword,
             
             // kSecMatchLimitOne indicates keychain should read
             // only the most recent item matching this query
-            kSecMatchLimit as String: kSecMatchLimitOne,
+            kSecMatchLimit: kSecMatchLimitOne,
             
             // kSecReturnData is set to kCFBooleanTrue in order
             // to retrieve the data for the item
-            kSecReturnData as String: kCFBooleanTrue
+            kSecReturnData: kCFBooleanTrue ?? "true"
         ]
         
         // SecItemCopyMatching will attempt to copy the item
@@ -167,12 +187,12 @@ class KeychainInterface {
     }
     
     static func deletePassword(service: String, account: String) throws {
-        let query: [String: AnyObject] = [
+        let query: [CFString: Any] = [
             // kSecAttrService,  kSecAttrAccount, and kSecClass
             // uniquely identify the item to delete in Keychain
-            kSecAttrService as String: service as AnyObject,
-            kSecAttrAccount as String: account as AnyObject,
-            kSecClass as String: kSecClassGenericPassword
+            kSecAttrService: service,
+            kSecAttrAccount: account,
+            kSecClass: kSecClassGenericPassword
         ]
         
         // SecItemDelete attempts to perform a delete operation
@@ -187,7 +207,19 @@ class KeychainInterface {
         }
     }
     
+    enum KeychainError: Error {
+        // Attempted read for an item that does not exist.
+        case itemNotFound
+        
+        // Attempted save to override an existing item.
+        // Use update instead of save to update existing items
+        case duplicateItem
+        
+        // A read of an item in any format other than Data
+        case invalidItemFormat
+        
+        // Any operation result status than errSecSuccess
+        case unexpectedStatus(OSStatus)
+    }
+    
 }
-
-
-
