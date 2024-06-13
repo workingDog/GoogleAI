@@ -29,7 +29,7 @@
 		C738A92029E43C79009E9494 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C738A91F29E43C79009E9494 /* README.md */; };
 		C754E2C32BAD35D300AF383A /* WavyLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C754E2C22BAD35D300AF383A /* WavyLineView.swift */; };
 		C756E55A2BB12D6C00ADBD58 /* s2.png in Resources */ = {isa = PBXBuildFile; fileRef = C756E5592BB12D6C00ADBD58 /* s2.png */; };
-		C756E55C2BB12D7200ADBD58 /* s1.png in Resources */ = {isa = PBXBuildFile; fileRef = C756E55B2BB12D7200ADBD58 /* s1.png */; };
+		C792D0912C1ACCEA00A96D1B /* s1.png in Resources */ = {isa = PBXBuildFile; fileRef = C792D0902C1ACCEA00A96D1B /* s1.png */; };
 		C797CA202B9D1C1500FDB525 /* InterfaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C797CA1F2B9D1C1500FDB525 /* InterfaceManager.swift */; };
 		C7CE2BD72A2EEAEF00BB552B /* SimpleBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE2BD62A2EEAEF00BB552B /* SimpleBubble.swift */; };
 		C7DF9AAF2BA99867006FADE8 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF9AAE2BA99867006FADE8 /* CameraView.swift */; };
@@ -64,7 +64,7 @@
 		C738A91F29E43C79009E9494 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C754E2C22BAD35D300AF383A /* WavyLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WavyLineView.swift; sourceTree = "<group>"; };
 		C756E5592BB12D6C00ADBD58 /* s2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s2.png; sourceTree = "<group>"; };
-		C756E55B2BB12D7200ADBD58 /* s1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s1.png; sourceTree = "<group>"; };
+		C792D0902C1ACCEA00A96D1B /* s1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s1.png; sourceTree = "<group>"; };
 		C797CA1F2B9D1C1500FDB525 /* InterfaceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceManager.swift; sourceTree = "<group>"; };
 		C7CE2BD62A2EEAEF00BB552B /* SimpleBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBubble.swift; sourceTree = "<group>"; };
 		C7DF9AAE2BA99867006FADE8 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				C756E5592BB12D6C00ADBD58 /* s2.png */,
-				C756E55B2BB12D7200ADBD58 /* s1.png */,
+				C792D0902C1ACCEA00A96D1B /* s1.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -247,8 +247,8 @@
 				C738A91B29E43B8B009E9494 /* Localizable.strings in Resources */,
 				C738A92029E43C79009E9494 /* README.md in Resources */,
 				C756E55A2BB12D6C00ADBD58 /* s2.png in Resources */,
-				C756E55C2BB12D7200ADBD58 /* s1.png in Resources */,
 				C738A8D129E43739009E9494 /* Assets.xcassets in Resources */,
+				C792D0912C1ACCEA00A96D1B /* s1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
