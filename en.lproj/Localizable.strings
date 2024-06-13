@@ -13,6 +13,7 @@
 "mode" = "mode";
 "Temperature" = "Temp";
 "Max tokens" = "Tokens";
+"Model" = "Model";
 
 "en" = "English";
 "ja" = "Japanese";

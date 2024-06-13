@@ -35,18 +35,18 @@ struct ParameterView: View {
     @Environment(AiManager.self) var aiManager
     @Environment(InterfaceManager.self) var interface
     
-    @State private var lang = "en" 
+    @State private var lang = "en"
     @State private var config = PlainConfig()
     
     var body: some View {
         @Bindable var aiManager = aiManager
         @Bindable var interface = interface
-        VStack {
+        VStack(spacing: 13) {
 
             HStack {
                 HStack {
                     Text("Temperature")
-                    Text(" \(config.temperature, specifier: "%.1f")     ").foregroundStyle(.blue)
+                    Text(" \(config.temperature, specifier: "%.1f")     ").foregroundStyle(.primary)
                 }
                 Spacer()
                 Slider(value: $config.temperature, in: 0...1, step: 0.1)
@@ -55,7 +55,7 @@ struct ParameterView: View {
             HStack {
                 HStack {
                     Text("Max tokens")
-                    Text(" \(Int(config.maxOutputTokens))   ").foregroundStyle(.blue)
+                    Text(" \(Int(config.maxOutputTokens))   ").foregroundStyle(.primary)
                 }
                 Spacer()
                 Slider(value: $config.maxOutputTokens, in: 100...2000, step: 100)
@@ -64,7 +64,7 @@ struct ParameterView: View {
             HStack {
                 HStack {
                     Text("topP")
-                    Text(" \(config.topP, specifier: "%.1f") ").foregroundStyle(.blue)
+                    Text(" \(config.topP, specifier: "%.1f") ").foregroundStyle(.primary)
                 }
                 Spacer()
                 Slider(value: $config.topP, in: 0...1, step: 0.1)
@@ -73,11 +73,22 @@ struct ParameterView: View {
             HStack {
                 HStack {
                     Text("topK")
-                    Text(" \(Int(config.topK))   ").foregroundStyle(.blue)
+                    Text(" \(Int(config.topK))   ").foregroundStyle(.primary)
                 }
                 Spacer()
                 Slider(value: $config.topK, in: 1...10, step: 1)
             }
+            
+            HStack {
+                HStack {
+                    Text("Model")
+                    TextField("", text: $aiManager.modelName)
+                        .font(.body)
+                        .foregroundStyle(.primary)
+                        .border(.primary)
+                }
+                Spacer()
+            }.padding(.top, 10)
 
             HStack {
                 Picker("", selection: $interface.kwuiklang) {
@@ -100,6 +111,7 @@ struct ParameterView: View {
                 stopSequences: config.stopSequences)
             aiManager.updateModel()
             StoreService.setModelConfig(config)
+            StoreService.setModelName(aiManager.modelName)
         }
     }
 }

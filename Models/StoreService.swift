@@ -77,7 +77,7 @@ class StoreService {
         UserDefaults.standard.set(isDark, forKey: "ringow.com.kwuikai.displaymode.key")
     }
     
-    static func getModelConfig() -> GenerationConfig {
+    static func getModelConfig() -> GenerationConfig? {
         if let config = UserDefaults.standard.retrieve(object: PlainConfig.self, fromKey: "ringow.com.kwuikai.modelconf.key") {
             return GenerationConfig(
                 temperature: config.temperature,
@@ -86,13 +86,20 @@ class StoreService {
                 candidateCount: Int(config.candidateCount),
                 maxOutputTokens: Int(config.maxOutputTokens),
                 stopSequences: config.stopSequences)
-        } else {
-            return GenerationConfig(maxOutputTokens: 1000)
         }
+        return nil
     }
     
     static func setModelConfig(_ conf: PlainConfig) {
         UserDefaults.standard.save(customObject: conf, inKey: "ringow.com.kwuikai.modelconf.key")
+    }
+    
+    static func getModelName() -> String? {
+        return UserDefaults.standard.string(forKey: "ringow.com.kwuikai.modelName.key")
+    }
+    
+    static func setModelName(_ str: String) {
+        UserDefaults.standard.set(str, forKey: "ringow.com.kwuikai.modelName.key")
     }
     
 }

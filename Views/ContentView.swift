@@ -16,6 +16,7 @@ struct ContentView: View {
     @Environment(AiManager.self) var aiManager
     @Environment(InterfaceManager.self) var interface
     
+    @State private var showAlert = false
     @State private var showSettings = false
     @FocusState var focusValue: Bool
     
@@ -31,13 +32,20 @@ struct ContentView: View {
                 MainView(focusValue: $focusValue).offset(x: 0, y: -16)
             }
         }
-        .onChange(of: aiManager.selectedMode) {
-            aiManager.updateModel()
-        }
         .sheet(isPresented: $showSettings) {
             SettingView()
                 .environment(aiManager)
                 .environment(interface)
+        }
+        .alert("Google AI Key is not set", isPresented: $showAlert) {
+            Button("OK") {}
+        } message: {
+            Text("Tap on the gear to enter your key")
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                showAlert = StoreService.getKey() == nil
+            }
         }
         
         // todo save the info/chat history when going into background

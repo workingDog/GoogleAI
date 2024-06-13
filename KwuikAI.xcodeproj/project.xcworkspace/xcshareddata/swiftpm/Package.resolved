@@ -1,5 +1,5 @@
 {
-  "originHash" : "b887797ee0dba68439ddf6479734b23a9520720fe38667c6d24dea3748ad83fa",
+  "originHash" : "a54ca9fe6f97c252fbc5e0fd6ff74c67aa6bbafabed9d983e6a393bc6d28e63d",
   "pins" : [
     {
       "identity" : "generative-ai-swift",
@@ -7,7 +7,7 @@
       "location" : "https://github.com/google/generative-ai-swift",
       "state" : {
         "branch" : "main",
-        "revision" : "48a0c2f11935a17132492583d4aad51c5a407bcb"
+        "revision" : "54784005b57c2235a7669e0c12e8dafa68f0ca5f"
       }
     },
     {
@@ -22,10 +22,10 @@
     {
       "identity" : "swift-markdown-ui",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/gonzalezreal/swift-markdown-ui",
+      "location" : "https://github.com/electricsidecar-dev/swift-markdown-ui.git",
       "state" : {
-        "revision" : "ae799d015a5374708f7b4c85f3294c05f2a564e2",
-        "version" : "2.3.0"
+        "branch" : "recursive",
+        "revision" : "f0d1b7fe722e6eda41db2e56f75529956ffa42fa"
       }
     }
   ],

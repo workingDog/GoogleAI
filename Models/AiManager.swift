@@ -20,27 +20,25 @@ import GoogleGenerativeAI
     var shareItem: Any = "nothing to share"
 
     var selectedMode: ModeType = .chat
-    var modelName = "gemini-1.0-pro-latest"   //"gemini-1.0-pro"  "gemini-1.0-pro-latest"
-    var config = GenerationConfig(maxOutputTokens: 1000)
     
-    @ObservationIgnored var client = GenerativeModel(name: "gemini-1.0-pro-latest", apiKey: "", generationConfig: GenerationConfig(maxOutputTokens: 1000))
+    @ObservationIgnored var client = GenerativeModel(name: "", apiKey: "", generationConfig: GenerationConfig(maxOutputTokens: 1000))
+
+    // need to call updateModel() after changing `config` or `modelName`
+    var config: GenerationConfig
+    var modelName: String
     
-    init() {
+    init(modelName: String) {
+        self.modelName = modelName
+        self.config = GenerationConfig(maxOutputTokens: 1000)
         let apikey = StoreService.getKey() ?? ""
-        self.config = StoreService.getModelConfig()
-        client = GenerativeModel(name: modelName, apiKey: apikey, generationConfig: config)
+        client = GenerativeModel(name: self.modelName, apiKey: apikey, generationConfig: config)
     }
 
     func updateModel() {
         let apikey = StoreService.getKey() ?? ""
-        switch selectedMode {
-            case .chat:
-                client = GenerativeModel(name: modelName, apiKey: apikey, generationConfig: config)
-            case .image, .camera:
-                client = GenerativeModel(name: "gemini-1.0-pro-vision-latest", apiKey: apikey, generationConfig: config)
-        }
+        client = GenerativeModel(name: modelName, apiKey: apikey, generationConfig: config)
     }
-    
+
     func updateClientKey(_ apikey: String) {
         client = GenerativeModel(name: modelName, apiKey: apikey, generationConfig: config)
     }
@@ -54,8 +52,10 @@ import GoogleGenerativeAI
         errorDetected = false
 
         switch selectedMode {
-            case .chat: await getChats(from: text)
-            case .image, .camera: await getVision(from: text, images: images)
+            case .chat: 
+                await getChats(from: text)
+            case .image, .camera: 
+                await getVision(from: text, images: images)
         }
         
         haveResponse.toggle()

@@ -44,3 +44,5 @@
 "Copy your OpenAI key from" = "から OpenAI キーをコピーします";
 "Type here first..." = "最初にここに入力してください...";
 "Camera" = "カメラ";
+"Model" = "モデル名";
+

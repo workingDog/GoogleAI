@@ -37,8 +37,11 @@ Press the **gear shape** icon to:
 -   select the model parameters,
 -   select the UI colors,
 -   select the UI language
+
+Note, the [Google AI key](https://ai.google.dev/) is stored securely on the device keychain.
+
   
-### References
+### References and dependencies
 
 -    [Google AI SDK for Swift](https://github.com/google/generative-ai-swift)
 -    [MarkdownUI](https://github.com/gonzalezreal/swift-markdown-ui)
