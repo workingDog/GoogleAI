@@ -40,7 +40,7 @@ struct ContentView: View {
         .alert("Google AI Key is not set", isPresented: $showAlert) {
             Button("OK") {}
         } message: {
-            Text("Tap on the gear to enter your key")
+            Text("Tap the gear symbol ⚙︎ to enter your key")
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {

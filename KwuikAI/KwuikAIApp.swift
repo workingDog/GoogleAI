@@ -24,13 +24,12 @@ struct KwuikAIApp: App {
                     // get model name from UserDefaults if any
                     if let model = StoreService.getModelName() {
                         aiManager.modelName = model
-                        aiManager.updateModel()
                     } 
                     // get config from UserDefaults if any
                     if let config = StoreService.getModelConfig() {
                         aiManager.config = config
-                        aiManager.updateModel()
                     }
+                    aiManager.updateModel()
                 }
         }
     }
