@@ -29,12 +29,13 @@
 		C738A92029E43C79009E9494 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C738A91F29E43C79009E9494 /* README.md */; };
 		C754E2C32BAD35D300AF383A /* WavyLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C754E2C22BAD35D300AF383A /* WavyLineView.swift */; };
 		C756E55A2BB12D6C00ADBD58 /* s2.png in Resources */ = {isa = PBXBuildFile; fileRef = C756E5592BB12D6C00ADBD58 /* s2.png */; };
+		C75933832C2026C2009AFAD9 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = C75933822C2026C2009AFAD9 /* MarkdownUI */; };
 		C792D0912C1ACCEA00A96D1B /* s1.png in Resources */ = {isa = PBXBuildFile; fileRef = C792D0902C1ACCEA00A96D1B /* s1.png */; };
 		C797CA202B9D1C1500FDB525 /* InterfaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C797CA1F2B9D1C1500FDB525 /* InterfaceManager.swift */; };
 		C7CE2BD72A2EEAEF00BB552B /* SimpleBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE2BD62A2EEAEF00BB552B /* SimpleBubble.swift */; };
+		C7D84C2F2C1D170900FD08FE /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = C7D84C2E2C1D170900FD08FE /* MarkdownUI */; };
 		C7DF9AAF2BA99867006FADE8 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF9AAE2BA99867006FADE8 /* CameraView.swift */; };
 		C7F1EF522C1A832900CE6C3C /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = C7F1EF512C1A832900CE6C3C /* GoogleGenerativeAI */; };
-		C7F1EF552C1A83FF00CE6C3C /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = C7F1EF542C1A83FF00CE6C3C /* MarkdownUI */; };
 		C7FBCDD129E52A7A00C457BB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FBCDD029E52A7A00C457BB /* MainView.swift */; };
 /* End PBXBuildFile section */
 
@@ -76,8 +77,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C75933832C2026C2009AFAD9 /* MarkdownUI in Frameworks */,
 				C7F1EF522C1A832900CE6C3C /* GoogleGenerativeAI in Frameworks */,
-				C7F1EF552C1A83FF00CE6C3C /* MarkdownUI in Frameworks */,
+				C7D84C2F2C1D170900FD08FE /* MarkdownUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,7 +195,8 @@
 			name = KwuikAI;
 			packageProductDependencies = (
 				C7F1EF512C1A832900CE6C3C /* GoogleGenerativeAI */,
-				C7F1EF542C1A83FF00CE6C3C /* MarkdownUI */,
+				C7D84C2E2C1D170900FD08FE /* MarkdownUI */,
+				C75933822C2026C2009AFAD9 /* MarkdownUI */,
 			);
 			productName = KwuikAI;
 			productReference = C738A8C929E43737009E9494 /* KwuikAI.app */;
@@ -226,7 +229,7 @@
 			mainGroup = C738A8C029E43737009E9494;
 			packageReferences = (
 				C7F1EF502C1A832900CE6C3C /* XCRemoteSwiftPackageReference "generative-ai-swift" */,
-				C7F1EF532C1A83FF00CE6C3C /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
+				C75933812C2026C2009AFAD9 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 			);
 			productRefGroup = C738A8CA29E43737009E9494 /* Products */;
 			projectDirPath = "";
@@ -432,7 +435,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -470,7 +473,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -511,6 +514,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C75933812C2026C2009AFAD9 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		C7F1EF502C1A832900CE6C3C /* XCRemoteSwiftPackageReference "generative-ai-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/generative-ai-swift";
@@ -519,26 +530,22 @@
 				kind = branch;
 			};
 		};
-		C7F1EF532C1A83FF00CE6C3C /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/electricsidecar-dev/swift-markdown-ui.git";
-			requirement = {
-				branch = recursive;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C75933822C2026C2009AFAD9 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C75933812C2026C2009AFAD9 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
+		};
+		C7D84C2E2C1D170900FD08FE /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MarkdownUI;
+		};
 		C7F1EF512C1A832900CE6C3C /* GoogleGenerativeAI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C7F1EF502C1A832900CE6C3C /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
 			productName = GoogleGenerativeAI;
-		};
-		C7F1EF542C1A83FF00CE6C3C /* MarkdownUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C7F1EF532C1A83FF00CE6C3C /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
-			productName = MarkdownUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

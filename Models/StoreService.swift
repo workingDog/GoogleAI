@@ -102,4 +102,12 @@ class StoreService {
         UserDefaults.standard.set(str, forKey: "ringow.com.kwuikai.modelName.key")
     }
     
+    static func getTextSize() -> Int {
+        return UserDefaults.standard.integer(forKey: "ringow.com.kwuikai.textsize.key")
+    }
+    
+    static func setTextSize(_ val: Int) {
+        UserDefaults.standard.set(val, forKey: "ringow.com.kwuikai.textsize.key")
+    }
+    
 }

@@ -113,13 +113,14 @@ struct MainView: View {
                 TextEditor(text: $text)
                     .focused($focusValue)
                     .frame(height: 110)
-                    .font(.callout)
+                    .font(.system(size: CGFloat(interface.textSize)))
                     .padding(.all, 10)
                     .scrollContentBackground(.hidden)
                     .foregroundStyle(interface.textColor)
                     .background(interface.questionColor)
                     .overlay(
                         Text("Type here first...")
+                            .font(.system(size: CGFloat(interface.textSize)))
                             .foregroundStyle(.black)
                             .opacity(text.isEmpty && !focusValue ? 1 : 0)
                             .onTapGesture {

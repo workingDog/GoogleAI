@@ -24,6 +24,7 @@ struct CompletionView: View {
     @ViewBuilder
     func txtView(_ converse: Conversation) -> some View {
         Text(converse.question.text)
+            .font(.system(size: CGFloat(interface.textSize)))
             .padding(.all, 10)
             .foregroundStyle(txtIsPressed && (selectedConverseId == converse.id) ? interface.copyColor : interface.textColor)
             .onTapGesture {

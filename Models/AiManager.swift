@@ -98,5 +98,23 @@ import GoogleGenerativeAI
             print(error)
         }
     }
+    
+//    func getAudio(from text: String) async {
+//        var results: GenerateContentResponse
+//        do {
+//            let audioData: Data = Data() //.data(mimetype: "mp3", fileData)
+//            results = try await client.generateContent([audioData, text])
+//            if let output = results.text {
+//                conversations.last?.answer = InfoItem(text: output, images: [])
+//                conversations.last?.history.append(ModelContent(role: "user", parts: text))
+//                conversations.last?.history.append(ModelContent(role: "model", parts: output))
+//            } else {
+//                errorDetected = true
+//            }
+//        } catch {
+//            errorDetected = true
+//            print(error)
+//        }
+//    }
 
 }

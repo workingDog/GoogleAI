@@ -76,7 +76,8 @@ struct SettingView: View {
         StoreService.setColor(ColorType.tools, color: interface.toolsColor)
         StoreService.setLang(interface.kwuiklang)
         StoreService.setDisplayMode(interface.isDarkMode)
-
+        StoreService.setTextSize(interface.textSize)
+        
         dismiss()
     }
     

@@ -15,7 +15,31 @@ struct ColorView: View {
     
     var body: some View {
         @Bindable var interface = interface
-        VStack {
+        VStack (spacing: 0) {
+            HStack {
+                Spacer()
+                Button {
+                    if interface.textSize < 13 {
+                        interface.textSize = 12 // minimum size
+                    } else {
+                        interface.textSize -= 1
+                    }
+                } label: {
+                    Image(systemName: "textformat.size.smaller")
+                }
+                Text("\(interface.textSize)").monospacedDigit()
+                Button {
+                    if interface.textSize > 31 {
+                        interface.textSize = 32 // maximum size
+                    } else {
+                        interface.textSize += 1
+                    }
+                } label: {
+                    Image(systemName: "textformat.size.larger")
+                }
+                Spacer()
+            }.buttonStyle(.borderedProminent)
+            
             HStack {
                 ColorPicker("Colors", selection: Binding<Color>(
                     get: {
@@ -39,14 +63,14 @@ struct ColorView: View {
                         }
                     }
                 ))
-                .frame(width: 111, height: 60)
-                .padding(15)
+                .frame(width: 111, height: 40)
+                .padding(.bottom, 10)
                 Spacer()
                 Toggle(isOn: $interface.isDarkMode) {
                     Text("Dark")
                 }
                 .frame(width: 110)
-                .padding(15)
+                .padding(.bottom, 10)
             }
             Picker("", selection: $interface.selectedColor) {
                 Text("Back").tag(ColorType.back)

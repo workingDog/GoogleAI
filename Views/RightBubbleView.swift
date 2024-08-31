@@ -32,7 +32,7 @@ struct RightBubbleView: View {
                 Markdown(converse.answer.text)
                     .markdownTextStyle {
                         FontFamilyVariant(.normal)
-                        FontSize(.em(0.85))
+                        FontSize(CGFloat(interface.textSize))
                         ForegroundColor(interface.textColor)
                     }
                     .markdownBlockStyle(\.codeBlock) { configuration in
@@ -40,14 +40,15 @@ struct RightBubbleView: View {
                             .relativeLineSpacing(.em(0.25))
                             .markdownTextStyle {
                                 FontFamilyVariant(.monospaced)
-                                FontSize(.em(0.85))
+                                FontSize(CGFloat(interface.textSize))
                                 ForegroundColor(interface.textColor)
                             }
                             .padding()
                             .clipShape(RoundedRectangle(cornerRadius: 8))
                             .markdownMargin(top: .zero, bottom: .em(0.8))
                     }
-                
+
+                // without markdown and its dependency
                 //Text(LocalizedStringKey(converse.answer.text))
                 //  .foregroundStyle(interface.textColor)
                     .padding(.all, 15)

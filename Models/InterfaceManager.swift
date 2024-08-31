@@ -23,6 +23,7 @@ import Observation
     
     var kwuiklang = "en"
     var isDarkMode = false
+    var textSize: Int = 12
     
     
     init() {
@@ -35,6 +36,7 @@ import Observation
         
         kwuiklang = StoreService.getLang()
         isDarkMode = StoreService.getDisplayMode()
+        textSize = StoreService.getTextSize()
     }
 
 }
