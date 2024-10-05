@@ -32,7 +32,7 @@ struct MainView: View {
                 .ignoresSafeArea(.all)
                 .onTapGesture { focusValue = false }
             VStack(spacing: 1) {
-                inputView
+                InputView()
                 CompletionView(isThinking: $isThinking)
                 Spacer()
             }
@@ -65,10 +65,13 @@ struct MainView: View {
                 doAsk()
             }
         }
+     //   .onAppear {
+          //  focusValue = true
+     //   }
     }
     
     @ViewBuilder
-    var inputView: some View {
+    func InputView() -> some View {
         VStack (spacing: 4) {
             Button(action: {
                 isPressed.toggle()

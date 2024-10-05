@@ -28,7 +28,7 @@ struct ContentView: View {
             .ignoresSafeArea(.all)
             .onTapGesture { focusValue = false }
             VStack(spacing: 3) {
-                theToolbar.padding(5)
+                AIToolbar().padding(5)
                 MainView(focusValue: $focusValue).offset(x: 0, y: -16)
             }
         }
@@ -64,14 +64,14 @@ struct ContentView: View {
     }
 
     @ViewBuilder
-    var theToolbar: some View {
+    func AIToolbar() -> some View {
         VStack {
             HStack {
-                leftButtons
+                LeftButtons()
                 Spacer()
-                modesButton
+                ModesButton()
                 Spacer()
-                settingsButton
+                SettingsButton()
             }
             .foregroundStyle(interface.toolsColor)
             .font(.title)
@@ -84,7 +84,7 @@ struct ContentView: View {
     }
     
     @ViewBuilder
-    var modesButton: some View {
+    func ModesButton() -> some View {
         @Bindable var aiManager = aiManager
         Picker("", selection: $aiManager.selectedMode) {
             Image(systemName: "ellipsis.message").tag(ModeType.chat)
@@ -98,24 +98,24 @@ struct ContentView: View {
     }
 
     @ViewBuilder
-    var settingsButton: some View {
+    func SettingsButton() -> some View {
         Button(action: { showSettings = true }) {
             Image(systemName: "gearshape")
         }
     }
     
     @ViewBuilder
-    var leftButtons: some View {
+    func LeftButtons() -> some View {
         HStack (spacing: 10){
             Button(action: { aiManager.conversations.removeAll() }) {
                 Image(systemName: "trash")
             }
-            shareLinkView()
+            ShareLinkView()
         }
     }
     
     @ViewBuilder
-    func shareLinkView() -> some View {
+    func ShareLinkView() -> some View {
         Group {
             if let uiimg = aiManager.shareItem as? UIImage {
                 let image = Image(uiImage: uiimg)
