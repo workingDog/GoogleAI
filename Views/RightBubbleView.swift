@@ -47,9 +47,9 @@ struct RightBubbleView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 8))
                             .markdownMargin(top: .zero, bottom: .em(0.8))
                     }
-
+    
                 // without markdown and its dependency
-                //Text(LocalizedStringKey(converse.answer.text))
+                // Text(LocalizedStringKey(converse.answer.text))
                 //  .foregroundStyle(interface.textColor)
                     .padding(.all, 15)
                     .background(isPressed ? interface.copyColor : interface.answerColor)

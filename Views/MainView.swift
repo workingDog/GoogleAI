@@ -108,6 +108,7 @@ struct MainView: View {
                     }
                 }
             }
+            .disabled(text.isEmpty ? true : false)
             .shadow(radius: 10)
        //     .overlay(Circle().stroke(interface.toolsColor, lineWidth: 4))
 
