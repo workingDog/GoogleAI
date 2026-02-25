@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import GoogleGenerativeAI
+import GeminiKit
 
 
 @Observable class AiManager {
@@ -21,26 +21,21 @@ import GoogleGenerativeAI
 
     var selectedMode: ModeType = .chat
     
-    @ObservationIgnored var client = GenerativeModel(name: "", apiKey: "", generationConfig: GenerationConfig(maxOutputTokens: 1000))
+    @ObservationIgnored var client = GeminiKit(apiKey: "your-api-key")
 
     // need to call updateModel() after changing `config` or `modelName`
     var config: GenerationConfig
-    var modelName: String
+
+    var model: GeminiModel = .gemini25Flash
     
-    init(modelName: String) {
-        self.modelName = modelName
+    init() {
         self.config = GenerationConfig(maxOutputTokens: 1000)
         let apikey = StoreService.getKey() ?? ""
-        client = GenerativeModel(name: self.modelName, apiKey: apikey, generationConfig: config)
-    }
-
-    func updateModel() {
-        let apikey = StoreService.getKey() ?? ""
-        client = GenerativeModel(name: modelName, apiKey: apikey, generationConfig: config)
+        client = GeminiKit(apiKey: apikey)
     }
 
     func updateClientKey(_ apikey: String) {
-        client = GenerativeModel(name: modelName, apiKey: apikey, generationConfig: config)
+        client = GeminiKit(apiKey: apikey)
     }
     
     func getResponse(from text: String, images: [ImageItem] = []) async {
@@ -62,14 +57,38 @@ import GoogleGenerativeAI
     }
 
     func getVision(from text: String, images: [ImageItem]) async {
-        let imagesParts: [any ThrowingPartsRepresentable] = images.map{$0.uimage}
+        // let imagesParts = images.map{$0.uimage}
+        
+        // ----> need an image model here <----
+        
         do {
-            let results = try await client.generateContent(text, imagesParts)
-            if let output = results.text {
-                conversations.last?.answer = InfoItem(text: output, images: images)
-            } else {
-                errorDetected = true
+            var parts: [Part] = []
+
+            // TEXT
+            parts.append(.text(text))
+
+            // IMAGES
+            for image in images {
+                if let data = image.uimage.jpegData(compressionQuality: 0.8) {
+                    parts.append(
+                        Part.inlineData(InlineData(mimeType: "image/jpeg", data: data))
+                    )
+                }
             }
+
+            let content = Content(role: .user, parts: parts)
+            let request = GenerateContentRequest(contents: [content])
+            
+            let results = try await client.generateContent(model: model, request: request)
+
+            if let part = results.candidates?.first?.content.parts.first {
+                if case let .text(text) = part {
+                    conversations.last?.answer = InfoItem(text: text, images: images)
+                } else {
+                    errorDetected = true
+                }
+            }
+ 
         } catch {
             errorDetected = true
             print(error)
@@ -77,22 +96,14 @@ import GoogleGenerativeAI
     }
 
     func getChats(from text: String) async {
-        var results: GenerateContentResponse
+        var reply: String
         do {
-            let history = conversations.last?.history ?? []
-            if history.count > 1 {
-                let chat = client.startChat(history: history)
-                results = try await chat.sendMessage(text)
-            } else {
-                results = try await client.generateContent(text)
-            }
-            if let output = results.text {
-                conversations.last?.answer = InfoItem(text: output, images: [])
-                conversations.last?.history.append(ModelContent(role: "user", parts: text))
-                conversations.last?.history.append(ModelContent(role: "model", parts: output))
-            } else {
-                errorDetected = true
-            }
+            let history: [Content] = conversations.last?.history ?? []
+            let chat = client.startChat(model: model, history: history)
+            reply = try await chat.sendMessage(text)
+            conversations.last?.answer = InfoItem(text: reply, images: [])
+            conversations.last?.history.append(Content(role: .user, parts: [.text(text)]))
+            conversations.last?.history.append(Content(role: .model, parts: [.text(reply)]))
         } catch {
             errorDetected = true
             print(error)
@@ -117,4 +128,17 @@ import GoogleGenerativeAI
 //        }
 //    }
 
+}
+
+public enum APIError: Swift.Error, LocalizedError {
+    
+    case unknown, apiError(reason: String), parserError(reason: String), networkError(from: URLError)
+    
+    public var errorDescription: String? {
+        switch self {
+            case .unknown: return "Unknown error"
+            case .apiError(let reason), .parserError(let reason): return reason
+            case .networkError(let from): return from.localizedDescription
+        }
+    }
 }

@@ -1,13 +1,13 @@
 {
-  "originHash" : "b887797ee0dba68439ddf6479734b23a9520720fe38667c6d24dea3748ad83fa",
+  "originHash" : "a8626429e303eabaff4f1682994c9dbb0df96b3ccac3b45f1b4b2680932276d5",
   "pins" : [
     {
-      "identity" : "generative-ai-swift",
+      "identity" : "geminikit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/google/generative-ai-swift",
+      "location" : "https://github.com/guitaripod/GeminiKit",
       "state" : {
-        "branch" : "main",
-        "revision" : "54784005b57c2235a7669e0c12e8dafa68f0ca5f"
+        "revision" : "63827c07138f2c1fbf34b97b877c2a22d348e88f",
+        "version" : "1.0.0"
       }
     },
     {
@@ -20,12 +20,30 @@
       }
     },
     {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser",
+      "state" : {
+        "revision" : "c5d11a805e765f52ba34ec7284bd4fcd6ba68615",
+        "version" : "1.7.0"
+      }
+    },
+    {
+      "identity" : "swift-cmark",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-cmark",
+      "state" : {
+        "revision" : "5d9bdaa4228b381639fff09403e39a04926e2dbe",
+        "version" : "0.7.1"
+      }
+    },
+    {
       "identity" : "swift-markdown-ui",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gonzalezreal/swift-markdown-ui",
       "state" : {
-        "branch" : "main",
-        "revision" : "9a8119b37e09a770367eeb26e05267c75d854053"
+        "revision" : "5f613358148239d0292c0cef674a3c2314737f9e",
+        "version" : "2.4.1"
       }
     }
   ],

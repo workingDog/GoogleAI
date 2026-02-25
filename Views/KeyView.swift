@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-
 struct KeyView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(AiManager.self) var aiManager

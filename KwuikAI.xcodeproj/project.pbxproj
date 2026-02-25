@@ -29,13 +29,12 @@
 		C738A92029E43C79009E9494 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C738A91F29E43C79009E9494 /* README.md */; };
 		C754E2C32BAD35D300AF383A /* WavyLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C754E2C22BAD35D300AF383A /* WavyLineView.swift */; };
 		C756E55A2BB12D6C00ADBD58 /* s2.png in Resources */ = {isa = PBXBuildFile; fileRef = C756E5592BB12D6C00ADBD58 /* s2.png */; };
-		C75933832C2026C2009AFAD9 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = C75933822C2026C2009AFAD9 /* MarkdownUI */; };
+		C773781D2F4E7F150066F693 /* GeminiKit in Frameworks */ = {isa = PBXBuildFile; productRef = C773781C2F4E7F150066F693 /* GeminiKit */; };
+		C783DDFA2F4E7F6400D0C7E3 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = C783DDF92F4E7F6400D0C7E3 /* MarkdownUI */; };
 		C792D0912C1ACCEA00A96D1B /* s1.png in Resources */ = {isa = PBXBuildFile; fileRef = C792D0902C1ACCEA00A96D1B /* s1.png */; };
 		C797CA202B9D1C1500FDB525 /* InterfaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C797CA1F2B9D1C1500FDB525 /* InterfaceManager.swift */; };
 		C7CE2BD72A2EEAEF00BB552B /* SimpleBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE2BD62A2EEAEF00BB552B /* SimpleBubble.swift */; };
-		C7D84C2F2C1D170900FD08FE /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = C7D84C2E2C1D170900FD08FE /* MarkdownUI */; };
 		C7DF9AAF2BA99867006FADE8 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF9AAE2BA99867006FADE8 /* CameraView.swift */; };
-		C7F1EF522C1A832900CE6C3C /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = C7F1EF512C1A832900CE6C3C /* GoogleGenerativeAI */; };
 		C7FBCDD129E52A7A00C457BB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FBCDD029E52A7A00C457BB /* MainView.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,9 +76,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C75933832C2026C2009AFAD9 /* MarkdownUI in Frameworks */,
-				C7F1EF522C1A832900CE6C3C /* GoogleGenerativeAI in Frameworks */,
-				C7D84C2F2C1D170900FD08FE /* MarkdownUI in Frameworks */,
+				C773781D2F4E7F150066F693 /* GeminiKit in Frameworks */,
+				C783DDFA2F4E7F6400D0C7E3 /* MarkdownUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +95,7 @@
 				C738A8F529E4391E009E9494 /* Keychain */,
 				C738A8E129E4391E009E9494 /* Models */,
 				C738A8EB29E4391E009E9494 /* Views */,
+				C783DDF82F4E7F5600D0C7E3 /* Frameworks */,
 				C738A8CA29E43737009E9494 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -177,6 +176,13 @@
 			path = Keychain;
 			sourceTree = "<group>";
 		};
+		C783DDF82F4E7F5600D0C7E3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -194,9 +200,8 @@
 			);
 			name = KwuikAI;
 			packageProductDependencies = (
-				C7F1EF512C1A832900CE6C3C /* GoogleGenerativeAI */,
-				C7D84C2E2C1D170900FD08FE /* MarkdownUI */,
-				C75933822C2026C2009AFAD9 /* MarkdownUI */,
+				C773781C2F4E7F150066F693 /* GeminiKit */,
+				C783DDF92F4E7F6400D0C7E3 /* MarkdownUI */,
 			);
 			productName = KwuikAI;
 			productReference = C738A8C929E43737009E9494 /* KwuikAI.app */;
@@ -228,8 +233,8 @@
 			);
 			mainGroup = C738A8C029E43737009E9494;
 			packageReferences = (
-				C7F1EF502C1A832900CE6C3C /* XCRemoteSwiftPackageReference "generative-ai-swift" */,
-				C75933812C2026C2009AFAD9 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
+				C773781A2F4E7ED00066F693 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
+				C773781B2F4E7F150066F693 /* XCRemoteSwiftPackageReference "GeminiKit" */,
 			);
 			productRefGroup = C738A8CA29E43737009E9494 /* Products */;
 			projectDirPath = "";
@@ -435,7 +440,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -473,7 +478,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -514,38 +519,34 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C75933812C2026C2009AFAD9 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+		C773781A2F4E7ED00066F693 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.1;
 			};
 		};
-		C7F1EF502C1A832900CE6C3C /* XCRemoteSwiftPackageReference "generative-ai-swift" */ = {
+		C773781B2F4E7F150066F693 /* XCRemoteSwiftPackageReference "GeminiKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/google/generative-ai-swift";
+			repositoryURL = "https://github.com/guitaripod/GeminiKit";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C75933822C2026C2009AFAD9 /* MarkdownUI */ = {
+		C773781C2F4E7F150066F693 /* GeminiKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C75933812C2026C2009AFAD9 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
-			productName = MarkdownUI;
+			package = C773781B2F4E7F150066F693 /* XCRemoteSwiftPackageReference "GeminiKit" */;
+			productName = GeminiKit;
 		};
-		C7D84C2E2C1D170900FD08FE /* MarkdownUI */ = {
+		C783DDF92F4E7F6400D0C7E3 /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = C773781A2F4E7ED00066F693 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
 			productName = MarkdownUI;
-		};
-		C7F1EF512C1A832900CE6C3C /* GoogleGenerativeAI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C7F1EF502C1A832900CE6C3C /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
-			productName = GoogleGenerativeAI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

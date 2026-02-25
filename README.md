@@ -1,8 +1,9 @@
 # SwiftUI Google Gemini AI demo App
 
-A chat-like SwiftUI Google Gemini REST API demo App, includes text and image input.
+A chat-like SwiftUI Google Gemini REST API demo App, includes text and image input, no image output.
 
-Using, the **Google AI SDK for Swift** Client Library in Swift [Google AI SDK for Swift](https://github.com/google/generative-ai-swift).
+Using the Swift [GeminiKit](https://github.com/guitaripod/GeminiKit) library, 
+"A comprehensive Swift SDK for the Google Gemini API with full feature coverage and a powerful CLI".
 
 
 <p float="left">
@@ -43,7 +44,8 @@ Note, the [Google AI key](https://ai.google.dev/) is stored securely on the devi
   
 ### References and dependencies
 
--    [Google AI SDK for Swift](https://github.com/google/generative-ai-swift)
+-    [GeminiKit](https://github.com/guitaripod/GeminiKit)
+-    [GeminiKit docs](https://guitaripod.github.io/GeminiKit/documentation/geminikit)
 -    [MarkdownUI](https://github.com/gonzalezreal/swift-markdown-ui)
 
 ### Requirement
@@ -51,7 +53,6 @@ Note, the [Google AI key](https://ai.google.dev/) is stored securely on the devi
 **Requires** a valid API key, see:
 
 -    [Google AI for developers](https://ai.google.dev/)
--    [REST API](https://ai.google.dev/tutorials/rest_quickstart)
 
 Copy and paste the key into the **Settings** ("gear shape") and save it in the `Enter key` area.
 

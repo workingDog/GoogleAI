@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
-import Observation
+import GeminiKit
+
+
 
 @main
 struct KwuikAIApp: App {
-    @State private var aiManager = AiManager(modelName: "gemini-1.5-flash") 
+    @State private var aiManager = AiManager()
     @State private var interface = InterfaceManager()
     
     var body: some Scene {
@@ -22,14 +24,13 @@ struct KwuikAIApp: App {
                 .preferredColorScheme(interface.isDarkMode ? .dark : .light)
                 .onAppear {
                     // get model name from UserDefaults if any
-                    if let model = StoreService.getModelName() {
-                        aiManager.modelName = model
-                    } 
+                    if let rawName = StoreService.getModelName() {
+                        aiManager.model = GeminiModel(rawValue: rawName) ?? .gemini25Flash
+                    }
                     // get config from UserDefaults if any
                     if let config = StoreService.getModelConfig() {
                         aiManager.config = config
                     }
-                    aiManager.updateModel()
                 }
         }
     }

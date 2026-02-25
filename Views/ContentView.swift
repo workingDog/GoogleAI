@@ -6,8 +6,7 @@
 //
 import Foundation
 import SwiftUI
-import GoogleGenerativeAI
-
+import GeminiKit
 
 
 struct ContentView: View {

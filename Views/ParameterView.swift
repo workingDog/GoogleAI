@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import GoogleGenerativeAI
+import GeminiKit
 
 
 // just to make things easier in ParameterView sliders etc...
@@ -22,8 +22,8 @@ struct PlainConfig: Codable, Equatable {
     init() { }
     
     init(conf: GenerationConfig) {
-        self.temperature = conf.temperature ?? 0.3
-        self.topP = conf.topP ?? 0.95
+        self.temperature = Float(conf.temperature ?? 0.3)
+        self.topP = Float(conf.topP ?? 0.95)
         self.topK = Float(conf.topK ?? 1)
         self.candidateCount = Float(conf.candidateCount ?? 1)
         self.maxOutputTokens = Float(conf.maxOutputTokens ?? 1024)
@@ -82,10 +82,11 @@ struct ParameterView: View {
             HStack {
                 HStack {
                     Text("Model")
-                    TextField("", text: $aiManager.modelName)
-                        .font(.body)
-                        .foregroundStyle(.primary)
-                        .border(.primary)
+                    Picker("", selection: $aiManager.model) {
+                        ForEach(GeminiModel.allCases, id: \.self) { model in
+                            Text(model.rawValue).tag(model)
+                        }
+                    }.pickerStyle(.menu)
                 }
                 Spacer()
             }.padding(.top, 10)
@@ -103,15 +104,14 @@ struct ParameterView: View {
         }
         .onDisappear {
             aiManager.config = GenerationConfig(
-                temperature: config.temperature,
-                topP: config.topP,
+                temperature: Double(config.temperature),
+                topP: Double(config.topP),
                 topK: Int(config.topK),
                 candidateCount: Int(config.candidateCount),
                 maxOutputTokens: Int(config.maxOutputTokens),
                 stopSequences: config.stopSequences)
-            aiManager.updateModel()
             StoreService.setModelConfig(config)
-            StoreService.setModelName(aiManager.modelName)
+            StoreService.setModelName(aiManager.model.rawValue)
         }
     }
 }

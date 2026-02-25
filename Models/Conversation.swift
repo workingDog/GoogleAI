@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import GoogleGenerativeAI
+import GeminiKit
 
 
 
@@ -26,11 +26,11 @@ struct InfoItem: Identifiable, Hashable {
     let id = UUID()
     var question: InfoItem
     var answer: InfoItem
-    var history: [ModelContent]
+    var history: [Content]
     
     init(question: InfoItem = InfoItem(text: "", images: []),
          answer: InfoItem = InfoItem(text: "", images: []),
-         history: [ModelContent] = []) {
+         history: [Content] = []) {
         
         self.question = question
         self.answer = answer
