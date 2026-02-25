@@ -37,9 +37,3 @@ struct InfoItem: Identifiable, Hashable {
         self.history = history
     }
 }
-
- enum RoleType: String, Codable {
-    case system
-    case user
-    case model
-}

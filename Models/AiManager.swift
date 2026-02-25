@@ -18,18 +18,14 @@ import GeminiKit
     var haveResponse = false
 
     var shareItem: Any = "nothing to share"
-
     var selectedMode: ModeType = .chat
     
     @ObservationIgnored var client = GeminiKit(apiKey: "your-api-key")
 
-    // need to call updateModel() after changing `config` or `modelName`
-    var config: GenerationConfig
-
+    var config: GenerationConfig = GenerationConfig(maxOutputTokens: 1000)
     var model: GeminiModel = .gemini25Flash
     
     init() {
-        self.config = GenerationConfig(maxOutputTokens: 1000)
         let apikey = StoreService.getKey() ?? ""
         client = GeminiKit(apiKey: apikey)
     }
@@ -57,10 +53,6 @@ import GeminiKit
     }
 
     func getVision(from text: String, images: [ImageItem]) async {
-        // let imagesParts = images.map{$0.uimage}
-        
-        // ----> need an image model here <----
-        
         do {
             var parts: [Part] = []
 

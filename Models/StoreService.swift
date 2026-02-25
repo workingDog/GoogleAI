@@ -78,15 +78,15 @@ class StoreService {
     }
     
     static func getModelConfig() -> GenerationConfig? {
-//        if let config = UserDefaults.standard.retrieve(object: PlainConfig.self, fromKey: "ringow.com.kwuikai.modelconf.key") {
-//            return GenerationConfig(
-//                temperature: config.temperature,
-//                topP: config.topP,
-//                topK: Int(config.topK),
-//                candidateCount: Int(config.candidateCount),
-//                maxOutputTokens: Int(config.maxOutputTokens),
-//                stopSequences: config.stopSequences)
-//        }
+        if let config = UserDefaults.standard.retrieve(object: PlainConfig.self, fromKey: "ringow.com.kwuikai.modelconf.key") {
+            return GenerationConfig(
+                temperature: Double(config.temperature),
+                topP: Double(config.topP),
+                topK: Int(config.topK),
+                candidateCount: Int(config.candidateCount),
+                maxOutputTokens: Int(config.maxOutputTokens),
+                stopSequences: config.stopSequences)
+        }
         return nil
     }
     

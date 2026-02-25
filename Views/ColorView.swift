@@ -44,22 +44,22 @@ struct ColorView: View {
                 ColorPicker("Colors", selection: Binding<Color>(
                     get: {
                         switch interface.selectedColor {
-                        case .back: return interface.backColor
-                        case .text: return interface.textColor
-                        case .question: return interface.questionColor
-                        case .answer: return interface.answerColor
-                        case .copy: return interface.copyColor
-                        case .tools: return interface.toolsColor
+                            case .back: return interface.backColor
+                            case .text: return interface.textColor
+                            case .question: return interface.questionColor
+                            case .answer: return interface.answerColor
+                            case .copy: return interface.copyColor
+                            case .tools: return interface.toolsColor
                         }
                     },
                     set: {
                         switch interface.selectedColor {
-                        case .back: interface.backColor = $0
-                        case .text: interface.textColor = $0
-                        case .question: interface.questionColor = $0
-                        case .answer: interface.answerColor = $0
-                        case .copy: interface.copyColor = $0
-                        case .tools: interface.toolsColor = $0
+                            case .back: interface.backColor = $0
+                            case .text: interface.textColor = $0
+                            case .question: interface.questionColor = $0
+                            case .answer: interface.answerColor = $0
+                            case .copy: interface.copyColor = $0
+                            case .tools: interface.toolsColor = $0
                         }
                     }
                 ))
