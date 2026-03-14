@@ -43,7 +43,7 @@ Note, the [Google AI key](https://ai.google.dev/) is stored securely on the devi
   
 ### References and dependencies
 
--    [GeminiKit](https://github.com/guitaripod/GeminiKit)
+-    [GeminiKit-API](https://github.com/workingDog/GeminiKit-API)
 -    [GeminiKit docs](https://guitaripod.github.io/GeminiKit/documentation/geminikit)
 -    [MarkdownUI](https://github.com/gonzalezreal/swift-markdown-ui)
 
