@@ -2,9 +2,9 @@
 
 A chat-like SwiftUI Google Gemini REST API demo App, includes text and image input, no image output.
 
-Using the Swift [GeminiKit](https://github.com/guitaripod/GeminiKit) library, 
+Using the Swift [GeminiKit-API](https://github.com/workingDog/GeminiKit-API) library.
+This is a cutdown version of the original code [GeminiKit](https://github.com/guitaripod/GeminiKit) library, 
 "A comprehensive Swift SDK for the Google Gemini API with full feature coverage and a powerful CLI".
-
 
 <p float="left">
   <img src="Images/s2.png" width="333"  height="444" />
