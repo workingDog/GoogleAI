@@ -29,10 +29,11 @@
 		C738A92029E43C79009E9494 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C738A91F29E43C79009E9494 /* README.md */; };
 		C754E2C32BAD35D300AF383A /* WavyLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C754E2C22BAD35D300AF383A /* WavyLineView.swift */; };
 		C756E55A2BB12D6C00ADBD58 /* s2.png in Resources */ = {isa = PBXBuildFile; fileRef = C756E5592BB12D6C00ADBD58 /* s2.png */; };
-		C773781D2F4E7F150066F693 /* GeminiKit in Frameworks */ = {isa = PBXBuildFile; productRef = C773781C2F4E7F150066F693 /* GeminiKit */; };
 		C783DDFA2F4E7F6400D0C7E3 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = C783DDF92F4E7F6400D0C7E3 /* MarkdownUI */; };
+		C788BD212F64EF4B003FD66C /* GeminiKit in Frameworks */ = {isa = PBXBuildFile; productRef = C788BD202F64EF4B003FD66C /* GeminiKit */; };
 		C792D0912C1ACCEA00A96D1B /* s1.png in Resources */ = {isa = PBXBuildFile; fileRef = C792D0902C1ACCEA00A96D1B /* s1.png */; };
 		C797CA202B9D1C1500FDB525 /* InterfaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C797CA1F2B9D1C1500FDB525 /* InterfaceManager.swift */; };
+		C7BB36A12F6523C2005B7CE5 /* GeminiKit in Frameworks */ = {isa = PBXBuildFile; productRef = C7BB36A02F6523C2005B7CE5 /* GeminiKit */; };
 		C7CE2BD72A2EEAEF00BB552B /* SimpleBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE2BD62A2EEAEF00BB552B /* SimpleBubble.swift */; };
 		C7DF9AAF2BA99867006FADE8 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF9AAE2BA99867006FADE8 /* CameraView.swift */; };
 		C7FBCDD129E52A7A00C457BB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FBCDD029E52A7A00C457BB /* MainView.swift */; };
@@ -76,8 +77,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C773781D2F4E7F150066F693 /* GeminiKit in Frameworks */,
+				C788BD212F64EF4B003FD66C /* GeminiKit in Frameworks */,
 				C783DDFA2F4E7F6400D0C7E3 /* MarkdownUI in Frameworks */,
+				C7BB36A12F6523C2005B7CE5 /* GeminiKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,8 +202,9 @@
 			);
 			name = KwuikAI;
 			packageProductDependencies = (
-				C773781C2F4E7F150066F693 /* GeminiKit */,
 				C783DDF92F4E7F6400D0C7E3 /* MarkdownUI */,
+				C788BD202F64EF4B003FD66C /* GeminiKit */,
+				C7BB36A02F6523C2005B7CE5 /* GeminiKit */,
 			);
 			productName = KwuikAI;
 			productReference = C738A8C929E43737009E9494 /* KwuikAI.app */;
@@ -234,7 +237,7 @@
 			mainGroup = C738A8C029E43737009E9494;
 			packageReferences = (
 				C773781A2F4E7ED00066F693 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
-				C773781B2F4E7F150066F693 /* XCRemoteSwiftPackageReference "GeminiKit" */,
+				C7BB369F2F6523C2005B7CE5 /* XCRemoteSwiftPackageReference "GeminiKit-API" */,
 			);
 			productRefGroup = C738A8CA29E43737009E9494 /* Products */;
 			projectDirPath = "";
@@ -450,7 +453,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -488,7 +492,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -527,26 +532,30 @@
 				minimumVersion = 2.4.1;
 			};
 		};
-		C773781B2F4E7F150066F693 /* XCRemoteSwiftPackageReference "GeminiKit" */ = {
+		C7BB369F2F6523C2005B7CE5 /* XCRemoteSwiftPackageReference "GeminiKit-API" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/guitaripod/GeminiKit";
+			repositoryURL = "https://github.com/workingDog/GeminiKit-API";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				branch = main;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C773781C2F4E7F150066F693 /* GeminiKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C773781B2F4E7F150066F693 /* XCRemoteSwiftPackageReference "GeminiKit" */;
-			productName = GeminiKit;
-		};
 		C783DDF92F4E7F6400D0C7E3 /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C773781A2F4E7ED00066F693 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
 			productName = MarkdownUI;
+		};
+		C788BD202F64EF4B003FD66C /* GeminiKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GeminiKit;
+		};
+		C7BB36A02F6523C2005B7CE5 /* GeminiKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C7BB369F2F6523C2005B7CE5 /* XCRemoteSwiftPackageReference "GeminiKit-API" */;
+			productName = GeminiKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

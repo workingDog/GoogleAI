@@ -1,13 +1,13 @@
 {
-  "originHash" : "a8626429e303eabaff4f1682994c9dbb0df96b3ccac3b45f1b4b2680932276d5",
+  "originHash" : "c09f66520b3929e3e1ffdab6db5e1b608376500a581878fe495bf41b9365bff9",
   "pins" : [
     {
-      "identity" : "geminikit",
+      "identity" : "geminikit-api",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/guitaripod/GeminiKit",
+      "location" : "https://github.com/workingDog/GeminiKit-API",
       "state" : {
-        "revision" : "63827c07138f2c1fbf34b97b877c2a22d348e88f",
-        "version" : "1.0.0"
+        "branch" : "main",
+        "revision" : "4f4710e1b4a116039376f2be1ef54613713114b3"
       }
     },
     {
@@ -17,15 +17,6 @@
       "state" : {
         "revision" : "7aff8d1b31148d32c5933d75557d42f6323ee3d1",
         "version" : "6.0.0"
-      }
-    },
-    {
-      "identity" : "swift-argument-parser",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-argument-parser",
-      "state" : {
-        "revision" : "c5d11a805e765f52ba34ec7284bd4fcd6ba68615",
-        "version" : "1.7.0"
       }
     },
     {

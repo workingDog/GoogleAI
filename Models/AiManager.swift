@@ -23,11 +23,12 @@ import GeminiKit
     @ObservationIgnored var client = GeminiKit(apiKey: "your-api-key")
 
     var config: GenerationConfig = GenerationConfig(maxOutputTokens: 1000)
-    var model: GeminiModel = .gemini25Flash
-    
+    var model: GeminiModel = GeminiModel("gemini25Flash")
+
     init() {
         let apikey = StoreService.getKey() ?? ""
         client = GeminiKit(apiKey: apikey)
+        self.model = GeminiModel("gemini-3-flash-preview") 
     }
 
     func updateClientKey(_ apikey: String) {
@@ -36,20 +37,48 @@ import GeminiKit
     
     func getResponse(from text: String, images: [ImageItem] = []) async {
 
-        conversations.append(Conversation(question: InfoItem(text: text, images: images),
-                                          answer: InfoItem(text: "", images: []),
-                                          history: conversations.last?.history ?? []))
+        conversations.append(
+            Conversation(question: InfoItem(text: text, images: images),
+                         answer: InfoItem(text: "", images: []),
+                         history: conversations.last?.history ?? [])
+        )
         
         errorDetected = false
 
         switch selectedMode {
-            case .chat: 
-                await getChats(from: text)
-            case .image, .camera: 
-                await getVision(from: text, images: images)
+            case .chat:  await getChats(from: text)
+            case .image, .camera: await getVision(from: text, images: images)
         }
         
         haveResponse.toggle()
+    }
+
+    func getVision2(from text: String, images: [ImageItem]) async {
+        do {
+            print("-----> in getVision")
+            let results: [ImagenPrediction] = try await client.generateImages(prompt: text)
+            print("-----> in getVision results: \(results.description)")
+            
+            if let first: ImagenPrediction = results.first {
+                let base64 = first.bytesBase64Encoded
+                guard
+                    let data = Data(base64Encoded: base64),
+                    let uiImage = UIImage(data: data)
+                else {
+                    errorDetected = true
+                    print("-----> getVision guard error ")
+                    return
+                }
+                print("-----> getVision uiImage: \(uiImage.size) ")
+                let imgItem = ImageItem(uimage: uiImage)
+                conversations.last?.answer = InfoItem(text: text, images: [imgItem])
+            } else {
+                print("-----> getVision no image ")
+            }
+        } catch {
+            errorDetected = true
+            print("----> error: \(error)")
+        }
     }
 
     func getVision(from text: String, images: [ImageItem]) async {
@@ -62,9 +91,7 @@ import GeminiKit
             // IMAGES
             for image in images {
                 if let data = image.uimage.jpegData(compressionQuality: 0.8) {
-                    parts.append(
-                        Part.inlineData(InlineData(mimeType: "image/jpeg", data: data))
-                    )
+                    parts.append(Part.inlineData(InlineData(mimeType: "image/jpeg", data: data)))
                 }
             }
 
@@ -76,14 +103,20 @@ import GeminiKit
             if let part = results.candidates?.first?.content.parts.first {
                 if case let .text(text) = part {
                     conversations.last?.answer = InfoItem(text: text, images: images)
-                } else {
+                }
+                else {
                     errorDetected = true
                 }
+//                if case let .inlineData(inData) = part {
+//                    print("-----> getVision got image: \(inData) ")
+//                  //  let uiImage = part
+//                    
+//                    conversations.last?.answer = InfoItem(text: text, images: images)
+//                }
             }
- 
         } catch {
             errorDetected = true
-            print(error)
+            print("----> error: \(error)")
         }
     }
 
@@ -98,7 +131,7 @@ import GeminiKit
             conversations.last?.history.append(Content(role: .model, parts: [.text(reply)]))
         } catch {
             errorDetected = true
-            print(error)
+            print("----> error: \(error)")
         }
     }
     

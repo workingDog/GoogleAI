@@ -18,7 +18,7 @@ struct PlainConfig: Codable, Equatable {
     var candidateCount: Float = 1
     var maxOutputTokens: Float = 1024.0
     var stopSequences: [String] = []
-    
+
     init() { }
     
     init(conf: GenerationConfig) {
@@ -37,6 +37,8 @@ struct ParameterView: View {
     
     @State private var lang = "en"
     @State private var config = PlainConfig()
+    @State private var modelName: String = "gemini-3-flash-preview"
+    
     
     var body: some View {
         @Bindable var aiManager = aiManager
@@ -81,16 +83,17 @@ struct ParameterView: View {
             
             HStack {
                 HStack {
-                    Text("Model")
-                    Picker("", selection: $aiManager.model) {
-                        ForEach(GeminiModel.allCases, id: \.self) { model in
-                            Text(model.rawValue).tag(model)
+                    Text("Model: ")
+                    TextField("", text: $modelName)
+                        .padding(10)
+                        .border(.green)
+                        .onSubmit {
+                            aiManager.model = GeminiModel(modelName)
                         }
-                    }.pickerStyle(.menu)
                 }
                 Spacer()
             }.padding(.top, 10)
-
+            
             HStack {
                 Picker("", selection: $interface.kwuiklang) {
                     Text(verbatim: "English").tag("en")
@@ -111,7 +114,8 @@ struct ParameterView: View {
                 maxOutputTokens: Int(config.maxOutputTokens),
                 stopSequences: config.stopSequences)
             StoreService.setModelConfig(config)
-            StoreService.setModelName(aiManager.model.rawValue)
+            StoreService.setModelName(aiManager.model.modelId)
         }
+
     }
 }

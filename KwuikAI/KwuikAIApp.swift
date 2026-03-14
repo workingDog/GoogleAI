@@ -25,7 +25,7 @@ struct KwuikAIApp: App {
                 .onAppear {
                     // get model name from UserDefaults if any
                     if let rawName = StoreService.getModelName() {
-                        aiManager.model = GeminiModel(rawValue: rawName) ?? .gemini25Flash
+                        aiManager.model = GeminiModel(rawName)
                     }
                     // get config from UserDefaults if any
                     if let config = StoreService.getModelConfig() {
