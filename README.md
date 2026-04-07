@@ -13,22 +13,22 @@ Using the Swift [GeminiKit-API](https://github.com/workingDog/GeminiKit-API) lib
 
 ### Usage
 
--   **Pick** the conversation mode first, `Chat`, `Image` or `Camera`, 
+-   **Pick** the conversation mode first, *Chat*, *Image* or *Camera*, 
 then type a question **before** you tap on the main button.
 
-    - `Chat` for chat like interaction,
-    - `Image` for selecting one or more images from the Photos library,
-    - `Camera` to take one picture using the camera.
+    - *Chat* for chat like interaction,
+    - *Image* for selecting one or more images from the Photos library,
+    - *Camera* to take one picture using the camera.
     
--   **Tap** on a question or answer text, to **copy** the text to the `Pasteboard` and enable you to paste it elsewhere or `share` it. Similarly, tap on the picture to copy just the image.
+-   **Tap** on a question or answer text, to **copy** the text to the *Pasteboard* and enable you to paste it elsewhere or *share* it. Similarly, tap on the picture to copy just the image.
   
 -   **Swipe left** on a question/answer, to deleted it.
   
--   **Tap** on the `trash can`, to delete **all** questions and answers. 
+-   **Tap** on the *trash can*, to delete **all** questions and answers. 
 
--   **Tap** on the `share`, to share the previously tapped text or picture. 
+-   **Tap** on the *share*, to share the previously tapped text or picture. 
 
--   **Tap** on the `skill` button, to add/delete/modify skills in YAML frontmatter followed by Markdown content. The selected basic `skill` is then used in the call to the AI. Note no `tools` are called.
+-   **Tap** on the *skill* button, to add/delete/modify skills in YAML frontmatter followed by Markdown content. The selected basic *skill* is then used in the call to the AI. Note no *tools* are called.
 
 
 #### Settings
@@ -68,7 +68,7 @@ See also
 
 -    [Google AI for developers](https://ai.google.dev/)
 
-Copy and paste the key into the **Settings** ("gear shape") and save it in the `Enter key` area.
+Copy and paste the key into the **Settings** ("gear shape") and save it in the *Enter key* area.
 
 ### License
 

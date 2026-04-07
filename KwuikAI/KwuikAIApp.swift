@@ -14,6 +14,16 @@ import SwiftData
 struct KwuikAIApp: App {
     @State private var aiManager = AiManager()
     @State private var interface = InterfaceManager()
+    
+    var sharedModelContainer: ModelContainer = {
+        let schema = Schema([SkillModel.self])
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        do {
+            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
+    }()
 
     var body: some Scene {
         WindowGroup {
@@ -32,7 +42,7 @@ struct KwuikAIApp: App {
                         aiManager.config = config
                     }
                 }
-                .modelContainer(for: [SkillModel.self])
+                .modelContainer(sharedModelContainer)
         }
     }
 }
