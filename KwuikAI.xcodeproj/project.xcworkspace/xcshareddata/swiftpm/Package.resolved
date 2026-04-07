@@ -1,5 +1,5 @@
 {
-  "originHash" : "0dd226bb7c39b20f09bdc8cede207f522e37d50aa61892e6e1122b6e602e3343",
+  "originHash" : "c09f66520b3929e3e1ffdab6db5e1b608376500a581878fe495bf41b9365bff9",
   "pins" : [
     {
       "identity" : "geminikit-api",
@@ -7,7 +7,7 @@
       "location" : "https://github.com/workingDog/GeminiKit-API",
       "state" : {
         "branch" : "main",
-        "revision" : "4f4710e1b4a116039376f2be1ef54613713114b3"
+        "revision" : "125091b7382906ac2fde2801bcd831e5918e2f4a"
       }
     },
     {

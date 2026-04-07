@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import GeminiKit
+import GeminiKitAPI
 
 
 // just to make things easier in ParameterView sliders etc...

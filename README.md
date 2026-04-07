@@ -2,7 +2,7 @@
 
 A chat-like SwiftUI Google Gemini REST API demo App, includes text and image input, no image output.
 
-Using the Swift [GeminiKit-API](https://github.com/workingDog/GeminiKit-API) library, which is a cutdown version of the original code [GeminiKit](https://github.com/guitaripod/GeminiKit) library, 
+Using the Swift [GeminiKitAPI](https://github.com/workingDog/GeminiKit-API) library, which is a cutdown version of the original code [GeminiKit](https://github.com/guitaripod/GeminiKit) library, 
 "A comprehensive Swift SDK for the Google Gemini API with full feature coverage and a powerful CLI".
 
 <p float="left">
@@ -54,7 +54,7 @@ Note, the [Google AI key](https://ai.google.dev/) is stored securely on the devi
 
 #### Dependencies
 
--    [GeminiKit-API](https://github.com/workingDog/GeminiKit-API) derived from the original repo [GeminiKit](https://github.com/guitaripod/GeminiKit)
+-    [GeminiKitAPI](https://github.com/workingDog/GeminiKit-API) derived from the original repo [GeminiKit](https://github.com/guitaripod/GeminiKit)
 -    [MarkdownUI](https://github.com/gonzalezreal/swift-markdown-ui)
 
 See also

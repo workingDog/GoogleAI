@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import GeminiKit
+import GeminiKitAPI
 import SwiftData
 
 
