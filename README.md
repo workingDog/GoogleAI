@@ -6,7 +6,7 @@ Using the Swift [GeminiKit-API](https://github.com/workingDog/GeminiKit-API) lib
 "A comprehensive Swift SDK for the Google Gemini API with full feature coverage and a powerful CLI".
 
 <p float="left">
-  <img src="Images/s2.png" width="333"  height="444" />
+  <img src="Images/picture1.png" width="333"  height="444" />
     <img src="Images/s1.png" width="333"  height="444" />
 </p>
 
