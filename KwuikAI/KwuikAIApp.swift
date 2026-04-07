@@ -7,14 +7,14 @@
 
 import SwiftUI
 import GeminiKit
-
+import SwiftData
 
 
 @main
 struct KwuikAIApp: App {
     @State private var aiManager = AiManager()
     @State private var interface = InterfaceManager()
-    
+
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -32,6 +32,7 @@ struct KwuikAIApp: App {
                         aiManager.config = config
                     }
                 }
+                .modelContainer(for: [SkillModel.self])
         }
     }
 }

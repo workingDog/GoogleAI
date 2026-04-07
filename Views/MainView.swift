@@ -87,15 +87,21 @@ struct MainView: View {
                 }
             }) {
                 ZStack {
-                    Text(aiManager.selectedMode == .chat ? "Chat" : aiManager.selectedMode == .image ? "Image" : "Camera")
-                        .font(Font.custom("Didot-Italic", size: 17))
-                        .frame(width: 88, height: 88)
-                        .offset(y: -6)
-                        .foregroundStyle(interface.textColor)
-                        .background(isPressed ? interface.copyColor : interface.questionColor)
-                        .animation(.easeInOut(duration: 0.2)
-                            .reverse(on: $isPressed, delay: 0.2), value: isPressed)
-                        .clipShape(Circle())
+                    Group {
+                        switch aiManager.selectedMode {
+                            case .chat: Text("Chat")
+                            case .image: Image(systemName: "photo")
+                            case .camera: Image(systemName: "camera")
+                        }
+                    }
+                    .font(Font.custom("Didot-Italic", size: 17))
+                    .frame(width: 88, height: 88)
+                    .offset(y: -6)
+                    .foregroundStyle(interface.textColor)
+                    .background(isPressed ? interface.copyColor : interface.questionColor)
+                    .animation(.easeInOut(duration: 0.2)
+                        .reverse(on: $isPressed, delay: 0.2), value: isPressed)
+                    .clipShape(Circle())
 
                     if isThinking {
                         ProgressView().progressViewStyle(IconRotateStyle()).offset(y: 24)
@@ -107,6 +113,9 @@ struct MainView: View {
 //                        .animation(Animation.linear(duration: 3).repeatForever(autoreverses: false), value: isPressed)
                     }
                 }
+                
+                Text(aiManager.currentSkill.name)
+                
             }
             .disabled(text.isEmpty ? true : false)
             .shadow(radius: 10)

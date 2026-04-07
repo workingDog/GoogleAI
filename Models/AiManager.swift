@@ -12,6 +12,8 @@ import GeminiKit
 
 @Observable class AiManager {
     
+    var currentSkill: SkillModel = SkillModel.Empty
+    
     var conversations = [Conversation]()
     
     var errorDetected = false
@@ -121,11 +123,16 @@ import GeminiKit
     }
 
     func getChats(from text: String) async {
-        var reply: String
         do {
             let history: [Content] = conversations.last?.history ?? []
-            let chat = client.startChat(model: model, history: history)
-            reply = try await chat.sendMessage(text)
+
+            let chat = client.startChat(
+                model: model,
+                systemInstruction: currentSkill.skill,
+                history: history)
+            
+            let reply = try await chat.sendMessage(text)
+
             conversations.last?.answer = InfoItem(text: reply, images: [])
             conversations.last?.history.append(Content(role: .user, parts: [.text(text)]))
             conversations.last?.history.append(Content(role: .model, parts: [.text(reply)]))

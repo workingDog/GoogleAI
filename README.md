@@ -28,6 +28,8 @@ then type a question **before** you tap on the main button.
 
 -   **Tap** on the `share`, to share the previously tapped text or picture. 
 
+-   **Tap** on the `skill` button, to add/delete/modify skills in YAML frontmatter followed by Markdown content. The selected basic `skill` is then used in the call to the AI. Note no `tools` are called.
+
 
 #### Settings
 
@@ -43,9 +45,22 @@ Note, the [Google AI key](https://ai.google.dev/) is stored securely on the devi
   
 ### References and dependencies
 
--    [GeminiKit-API](https://github.com/workingDog/GeminiKit-API)
--    [GeminiKit docs](https://guitaripod.github.io/GeminiKit/documentation/geminikit)
+#### Skills
+
+-    [Agent Skills](https://agentskills.io/home)
+-    [Agent Skills github](https://github.com/agentskills/agentskills)
+-    [Swift Agent Skills](https://github.com/twostraws/Swift-Agent-Skills)
+-    [Gemini API skills](https://github.com/google-gemini/gemini-skills)
+
+#### Dependencies
+
+-    [GeminiKit-API](https://github.com/workingDog/GeminiKit-API) derived from the original repo [GeminiKit](https://github.com/guitaripod/GeminiKit)
 -    [MarkdownUI](https://github.com/gonzalezreal/swift-markdown-ui)
+
+See also
+
+-    [GeminiKit docs](https://guitaripod.github.io/GeminiKit/documentation/geminikit)
+
 
 ### Requirement
 

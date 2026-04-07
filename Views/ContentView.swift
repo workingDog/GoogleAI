@@ -7,9 +7,11 @@
 import Foundation
 import SwiftUI
 import GeminiKit
+import SwiftData
 
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) var scenePhase
     
     @Environment(AiManager.self) var aiManager
@@ -17,8 +19,12 @@ struct ContentView: View {
     
     @State private var showAlert = false
     @State private var showSettings = false
+    @State private var showSkill = false
     @FocusState var focusValue: Bool
     
+    @AppStorage(SKILLKEY) var storedSkill: String = ""
+    
+    @Query(sort: \SkillModel.name, order: .reverse) var allSkills: [SkillModel]
     
     var body: some View {
         ZStack {
@@ -36,6 +42,11 @@ struct ContentView: View {
                 .environment(aiManager)
                 .environment(interface)
         }
+        .fullScreenCover(isPresented: $showSkill) {
+            SkillSheetView()
+                .environment(aiManager)
+                .environment(interface)
+        }
         .alert("Google AI Key is not set", isPresented: $showAlert) {
             Button("OK") {}
         } message: {
@@ -45,6 +56,20 @@ struct ContentView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 showAlert = StoreService.getKey() == nil
             }
+
+            // initial skills
+            if allSkills.isEmpty {
+                modelContext.insert(SkillModel.Empty)
+                modelContext.insert(SkillModel(name: "SkillCreator", skill: SkillCreatorAgent))
+            }
+            
+            if let skill = allSkills.first(where: { $0.skillid == storedSkill }) {
+                aiManager.currentSkill = skill
+            }
+
+//            let appSupportDir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).last
+//            print("---> \(appSupportDir)")
+
         }
         
         // todo save the info/chat history when going into background
@@ -81,7 +106,7 @@ struct ContentView: View {
                 .padding(.vertical, 10)
         }
     }
-    
+
     @ViewBuilder
     func ModesButton() -> some View {
         @Bindable var aiManager = aiManager
@@ -95,6 +120,16 @@ struct ContentView: View {
         .frame(width: 140)
         .scaleEffect(1.3)
     }
+    
+    @ViewBuilder
+    func SkillButton() -> some View {
+        Button(action: { showSkill = true }) {
+            VStack {
+                Image(systemName: "sparkles.rectangle.stack")
+                Text("Skill").font(.caption)
+            }
+        }.offset(y: 8)
+    }
 
     @ViewBuilder
     func SettingsButton() -> some View {
@@ -102,7 +137,7 @@ struct ContentView: View {
             Image(systemName: "gearshape")
         }
     }
-    
+
     @ViewBuilder
     func LeftButtons() -> some View {
         HStack (spacing: 10){
@@ -110,6 +145,7 @@ struct ContentView: View {
                 Image(systemName: "trash")
             }
             ShareLinkView()
+            SkillButton()
         }
     }
     

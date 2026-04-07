@@ -49,8 +49,9 @@ struct RightBubbleView: View {
                     }
     
                 // without markdown and its dependency
-                // Text(LocalizedStringKey(converse.answer.text))
-                //  .foregroundStyle(interface.textColor)
+//                 Text(LocalizedStringKey(converse.answer.text))
+//                  .foregroundStyle(interface.textColor)
+                
                     .padding(.all, 15)
                     .background(isPressed ? interface.copyColor : interface.answerColor)
                     .onTapGesture {

@@ -10,6 +10,9 @@ import SwiftUI
 import UIKit
 
 
+// key for @AppStorage(SKILLKEY)
+let SKILLKEY = "activeSkill"
+
 extension UIImage {
     
     func resizeImageTo(size: CGSize) -> UIImage? {
