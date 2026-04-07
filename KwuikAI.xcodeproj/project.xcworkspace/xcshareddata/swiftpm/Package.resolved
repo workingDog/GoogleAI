@@ -1,13 +1,13 @@
 {
-  "originHash" : "c09f66520b3929e3e1ffdab6db5e1b608376500a581878fe495bf41b9365bff9",
+  "originHash" : "0cde3fddc592e2d469acb68727fcaca71f5fc62d5126814f2d9e483da6e36543",
   "pins" : [
     {
-      "identity" : "geminikit-api",
+      "identity" : "geminikitapi",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/workingDog/GeminiKit-API",
+      "location" : "https://github.com/workingDog/GeminiKitAPI",
       "state" : {
         "branch" : "main",
-        "revision" : "125091b7382906ac2fde2801bcd831e5918e2f4a"
+        "revision" : "bfd45e32d52cf1ed944e41c200597ebbd32e7829"
       }
     },
     {
