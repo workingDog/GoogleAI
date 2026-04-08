@@ -56,12 +56,14 @@ struct ContentView: View {
                 showAlert = StoreService.getKey() == nil
             }
 
-            // initial skills
+            // initial example skills
             if allSkills.isEmpty {
                 modelContext.insert(SkillModel.Empty)
+                modelContext.insert(SkillModel(name: "StarterSkill", skill: StarterSkill))
+                modelContext.insert(SkillModel(name: "GeneralTask", skill: GeneralTask))
                 modelContext.insert(SkillModel(name: "SkillCreator", skill: SkillCreatorAgent))
             }
-            
+
             if let skill = allSkills.first(where: { $0.skillid == storedSkill }) {
                 aiManager.currentSkill = skill
             }

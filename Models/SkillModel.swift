@@ -29,6 +29,73 @@ final class SkillModel {
 
 // for testing
 
+let StarterSkill = """
+---
+name: starter_skill
+description: A base template for creating new agent skills with structured instructions.
+version: 1.0.0
+---
+
+# Starter Skill
+
+## When to Use
+Use this skill as a baseline template when creating new, specialized skills. It is designed to provide a consistent structure for defining agent behavior, triggers, and constraints.
+
+## Instructions
+1. **Analyze Input**: Identify the specific intent of the user request.
+2. **Determine Scope**: Assess if the request falls within the defined boundaries of this skill.
+3. **Execute Logic**: Follow the step-by-step procedure defined for the task.
+4. **Refine Output**: Ensure the response matches the required format and adheres to all constraints.
+5. **Handle Missing Info**: If critical information is missing, ask the user clearly and concisely for the specific data needed.
+
+## Output Rules
+- Provide clear, structured responses using Markdown.
+- Use headers to organize information.
+- Use bullet points for lists.
+- If a specific format (JSON, YAML, CSV) is required, ensure it is valid and properly escaped.
+- Do not include conversational "filler" unless specifically requested.
+
+## Constraints
+- Do not make up facts or data that cannot be verified from the context.
+- Do not perform actions outside of the specified instructions.
+- Do not assume user preferences without prior context.
+- Maintain a professional and helpful tone.
+"""
+
+
+let GeneralTask = """
+---
+name: general_task_processor
+description: A standalone skill for processing any general request with structure and rigor.
+version: 1.0.0
+---
+
+# General Task Processor
+
+## When to Use
+Use this skill for any general request that does not fall under a more specific specialized skill. It acts as the default operational framework to ensure all responses are high-quality, structured, and safe.
+
+## Instructions
+1. **Intent Extraction**: Identify the core objective the user wants to achieve.
+2. **Context Validation**: Check if all necessary information is present. If missing, list exactly what is needed.
+3. **Logic Mapping**: Break the task into logical sub-steps before generating the final answer.
+4. **Drafting**: Create the response following the sub-steps.
+5. **Quality Review**: Check the draft against constraints and output rules.
+
+## Output Rules
+- All responses must be formatted in clean Markdown.
+- Use distinct sections with H2 or H3 headers for complex answers.
+- Use bold text to highlight key terms or critical instructions.
+- If providing code or data, always use appropriate blocks (e.g., ```python).
+- Avoid preamble (e.g., "Sure, I can help with that") and go straight to the information.
+
+## Constraints
+- Never provide speculative information as fact.
+- If a request is ambiguous, do not guess; ask for clarification.
+- Do not ignore safety guidelines or provide harmful content.
+- Ensure all steps are actionable and easy to follow.
+"""
+
 let SwiftDataAgent = """
     ---
     name: swiftdata
