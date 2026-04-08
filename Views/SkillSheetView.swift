@@ -18,6 +18,7 @@ struct SkillSheetView: View {
     @Query(sort: \SkillModel.name, order: .reverse) var allSkills: [SkillModel]
     
     @State private var skillSelected: SkillModel?
+    @State private var originalSkill: SkillModel = SkillModel.Empty
     @State private var editMode: EditMode = .inactive
     
     @AppStorage(SKILLKEY) var storedSkill: String = ""
@@ -74,8 +75,15 @@ struct SkillSheetView: View {
             }
         }
         .onAppear {
+            originalSkill = aiManager.currentSkill
             if let thisSkill = allSkills.first(where: { $0.skillid == storedSkill }) {
                 skillSelected = thisSkill
+            }
+        }
+        .onDisappear {
+            // if the skill has changed, reset the history
+            if originalSkill.skillid != aiManager.currentSkill.skillid {
+                aiManager.conversations.last?.history = []
             }
         }
     }
