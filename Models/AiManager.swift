@@ -12,7 +12,7 @@ import GeminiKitAPI
 
 @Observable class AiManager {
     
-    var currentSkill: SkillModel = SkillModel.Empty
+    var currentSkill: SkillModel = SkillModel(name: "Empty", skill: "")
     
     var conversations = [Conversation]()
     

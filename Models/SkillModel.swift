@@ -20,11 +20,6 @@ final class SkillModel {
         self.name = name
         self.skill = skill
     }
-    
-    static let Empty = SkillModel(name: "Empty", skill: "")
-    
-    static let NewSkill = SkillModel(name: "New skill",
-                             skill: "---\nname: new_skill\ndescription: Skill description\nversion: 1.0.0\n---\n")
 }
 
 // for testing

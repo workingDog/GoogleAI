@@ -18,7 +18,7 @@ struct SkillSheetView: View {
     @Query(sort: \SkillModel.name, order: .reverse) var allSkills: [SkillModel]
     
     @State private var skillSelected: SkillModel?
-    @State private var originalSkill: SkillModel = SkillModel.Empty
+    @State private var originalSkill: SkillModel = SkillModel(name: "Empty", skill: "")
     @State private var editMode: EditMode = .inactive
     
     @AppStorage(SKILLKEY) var storedSkill: String = ""
@@ -49,6 +49,8 @@ struct SkillSheetView: View {
                     }
                     .onDelete(perform: deleteSkill)
                 }
+                .listStyle(.plain)
+                .background(.thinMaterial)
                 .environment(\.editMode, $editMode)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
@@ -90,7 +92,7 @@ struct SkillSheetView: View {
     
     private func addSkill() {
         withAnimation {
-            modelContext.insert(SkillModel.NewSkill)
+            modelContext.insert(SkillModel(name: "New skill", skill: "---\nname: new_skill\ndescription: Skill description\nversion: 1.0.0\n---\n"))
         }
     }
 
@@ -100,7 +102,7 @@ struct SkillSheetView: View {
                 modelContext.delete(allSkills[index])
             }
             skillSelected = nil
-            aiManager.currentSkill = SkillModel.Empty
+            aiManager.currentSkill = SkillModel(name: "Empty", skill: "")
         }
     }
 }
@@ -112,6 +114,11 @@ struct SkillDetailsView: View {
     var skill: SkillModel?
     
     var body: some View {
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [interface.backColor, .white]),
+                           startPoint: .top, endPoint: .bottom)
+            .ignoresSafeArea(.all)
+            
             if let skill {
                 @Bindable var skill = skill
                 
@@ -123,7 +130,7 @@ struct SkillDetailsView: View {
             } else {
                 Text("no skills")
             }
-
+        }
     }
     
 }

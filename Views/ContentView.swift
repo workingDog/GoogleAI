@@ -58,7 +58,7 @@ struct ContentView: View {
 
             // initial example skills
             if allSkills.isEmpty {
-                modelContext.insert(SkillModel.Empty)
+                modelContext.insert(SkillModel(name: "Empty", skill: ""))
                 modelContext.insert(SkillModel(name: "StarterSkill", skill: StarterSkill))
                 modelContext.insert(SkillModel(name: "GeneralTask", skill: GeneralTask))
                 modelContext.insert(SkillModel(name: "SkillCreator", skill: SkillCreatorAgent))
