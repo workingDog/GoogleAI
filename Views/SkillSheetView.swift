@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 
+
 struct SkillSheetView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
@@ -45,6 +46,9 @@ struct SkillSheetView: View {
             .ignoresSafeArea()
             
             NavigationSplitView {
+#if !targetEnvironment(macCatalyst)
+                Text(aiManager.currentSkill.name)
+#endif
                 List(selection: $selectedSkillID) {
                     ForEach(skills) { skill in
                         SkillRowView(
@@ -63,7 +67,6 @@ struct SkillSheetView: View {
                 .listStyle(.plain)
                 .background(.thinMaterial)
                 .environment(\.editMode, $editMode)
-                .navigationTitle("Skills")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button("Done") {
@@ -154,6 +157,35 @@ struct SkillSheetView: View {
     }
 }
 
+private struct SkillRowView2: View {
+    @Bindable var skill: SkillModel
+    let isEditing: Bool
+    var focusedSkillID: FocusState<String?>.Binding
+    let onSelect: () -> Void
+
+    var body: some View {
+        HStack {
+            if isEditing {
+                TextField("Skill name", text: $skill.name)
+                    .focused(focusedSkillID, equals: skill.skillid)
+                    .textFieldStyle(.roundedBorder)
+                    .onTapGesture {
+                        onSelect()
+                    }
+            } else {
+                Text(skill.name)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            onSelect()
+        }
+    }
+}
+
+
+
 private struct SkillRowView: View {
     @Bindable var skill: SkillModel
     let isEditing: Bool
@@ -180,6 +212,10 @@ private struct SkillRowView: View {
             onSelect()
         }
         .background(isSelected ? Color.primary.opacity(0.08) : .clear)
+        .listRowBackground(
+            RoundedRectangle(cornerRadius: 8)
+                .fill(isSelected ? Color.accentColor.opacity(0.18) : Color.clear)
+        )
     }
 }
 
@@ -232,3 +268,4 @@ struct SkillDetailsEmptyView: View {
         }
     }
 }
+
