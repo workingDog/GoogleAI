@@ -73,6 +73,7 @@ struct MainView: View {
     @ViewBuilder
     func InputView() -> some View {
         VStack (spacing: 4) {
+            Text(aiManager.currentSkill.name).padding(.bottom, 8)
             Button(action: {
                 isPressed.toggle()
                 focusValue = false
@@ -113,9 +114,6 @@ struct MainView: View {
 //                        .animation(Animation.linear(duration: 3).repeatForever(autoreverses: false), value: isPressed)
                     }
                 }
-                
-                Text(aiManager.currentSkill.name)
-                
             }
             .disabled(text.isEmpty ? true : false)
             .shadow(radius: 10)

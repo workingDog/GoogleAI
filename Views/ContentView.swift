@@ -94,16 +94,16 @@ struct ContentView: View {
             HStack {
                 LeftButtons()
                 Spacer()
-                ModesButton()
-                Spacer()
                 SettingsButton()
             }
             .foregroundStyle(interface.toolsColor)
             .font(.title)
-            .padding(.bottom, 8)
+            .padding(.bottom, 10)
+            
+            ModesButton().padding(8)
             
             WavyLineView(height: 10.0, freq: 0.2, lineWidth: 2, lineLength: 333)
-                .offset(x: -10, y: 0)
+                .offset(x: -15, y: 0)
                 .padding(.vertical, 10)
         }
     }
@@ -125,11 +125,8 @@ struct ContentView: View {
     @ViewBuilder
     func SkillButton() -> some View {
         Button(action: { showSkill = true }) {
-            VStack {
-                Image(systemName: "sparkles.rectangle.stack")
-                Text("Skill").font(.caption)
-            }
-        }.offset(y: 8)
+            Image(systemName: "sparkles.rectangle.stack")
+        }
     }
 
     @ViewBuilder

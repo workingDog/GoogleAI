@@ -10,30 +10,31 @@ import SwiftData
 
 
 struct SkillSheetView: View {
+    @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @Environment(AiManager.self) private var aiManager
     @Environment(InterfaceManager.self) private var interface
-
+    
     @Query private var allSkills: [SkillModel]
-
+    
     @State private var selectedSkillID: String?
     @State private var originalSkill = SkillModel(name: "Empty", skill: "")
     @State private var editMode: EditMode = .inactive
     @FocusState private var focusedSkillID: String?
-
+    
     @AppStorage(SKILLKEY) private var storedSkill: String = ""
-
+    
     private var skills: [SkillModel] {
         allSkills.sorted { lhs, rhs in
             lhs.name.localizedCaseInsensitiveCompare(rhs.name) == .orderedAscending
         }
     }
-
+    
     private var selectedSkill: SkillModel? {
         guard let selectedSkillID else { return nil }
         return allSkills.first(where: { $0.skillid == selectedSkillID })
     }
-
+    
     var body: some View {
         ZStack {
             LinearGradient(
@@ -42,7 +43,7 @@ struct SkillSheetView: View {
                 endPoint: .bottom
             )
             .ignoresSafeArea()
-
+            
             NavigationSplitView {
                 List(selection: $selectedSkillID) {
                     ForEach(skills) { skill in
@@ -64,12 +65,18 @@ struct SkillSheetView: View {
                 .environment(\.editMode, $editMode)
                 .navigationTitle("Skills")
                 .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Done") {
+                            dismiss()
+                        }
+                    }
+                    
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(editMode == .active ? "Done" : "Edit") {
                             editMode = editMode == .active ? .inactive : .active
                         }
                     }
-
+                    
                     ToolbarItem {
                         Button(action: addSkill) {
                             Label("Add Skill", systemImage: "plus")
@@ -77,13 +84,13 @@ struct SkillSheetView: View {
                     }
                 }
             } detail: {
-            if let selectedSkill {
-                SkillDetailsView(skill: selectedSkill)
-            } else {
-                SkillDetailsEmptyView()
+                if let selectedSkill {
+                    SkillDetailsView(skill: selectedSkill)
+                } else {
+                    SkillDetailsEmptyView()
+                }
             }
-        }
-
+            
         }
         .onChange(of: focusedSkillID) { _, newValue in
             guard let newValue else { return }
@@ -96,7 +103,7 @@ struct SkillSheetView: View {
         }
         .onAppear {
             originalSkill = aiManager.currentSkill
-
+            
             if let stored = allSkills.first(where: { $0.skillid == storedSkill }) {
                 selectedSkillID = stored.skillid
             } else if let current = allSkills.first(where: { $0.skillid == aiManager.currentSkill.skillid }) {
@@ -111,7 +118,7 @@ struct SkillSheetView: View {
             }
         }
     }
-
+    
     private func addSkill() {
         withAnimation {
             let newSkill = SkillModel(
@@ -123,22 +130,22 @@ struct SkillSheetView: View {
             focusedSkillID = newSkill.skillid
         }
     }
-
+    
     private func deleteSkill(offsets: IndexSet) {
         withAnimation {
             let deletedIDs = offsets.map { skills[$0].skillid }
-
+            
             for index in offsets {
                 modelContext.delete(skills[index])
             }
-
+            
             if let selectedSkillID, deletedIDs.contains(selectedSkillID) {
                 self.selectedSkillID = skills.enumerated()
                     .filter { !offsets.contains($0.offset) }
                     .map(\.element.skillid)
                     .first
             }
-
+            
             if self.selectedSkillID == nil {
                 aiManager.currentSkill = SkillModel(name: "Empty", skill: "")
                 storedSkill = ""
@@ -153,7 +160,7 @@ private struct SkillRowView: View {
     let isSelected: Bool
     var focusedSkillID: FocusState<String?>.Binding
     let onSelect: () -> Void
-
+    
     var body: some View {
         HStack {
             if isEditing {
@@ -179,7 +186,7 @@ private struct SkillRowView: View {
 struct SkillDetailsView: View {
     @Environment(InterfaceManager.self) private var interface
     @Bindable var skill: SkillModel
-
+    
     var body: some View {
         ZStack {
             LinearGradient(
@@ -188,7 +195,7 @@ struct SkillDetailsView: View {
                 endPoint: .bottom
             )
             .ignoresSafeArea()
-
+            
             TextEditor(text: $skill.skill)
                 .scrollContentBackground(.hidden)
                 .background(
@@ -207,7 +214,7 @@ struct SkillDetailsView: View {
 
 struct SkillDetailsEmptyView: View {
     @Environment(InterfaceManager.self) private var interface
-
+    
     var body: some View {
         ZStack {
             LinearGradient(
@@ -216,7 +223,7 @@ struct SkillDetailsEmptyView: View {
                 endPoint: .bottom
             )
             .ignoresSafeArea()
-
+            
             ContentUnavailableView(
                 "No Skill Selected",
                 systemImage: "slider.horizontal.3",
