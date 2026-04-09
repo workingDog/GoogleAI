@@ -9,7 +9,6 @@ import SwiftUI
 import SwiftData
 
 
-
 struct SkillSheetView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
@@ -37,63 +36,17 @@ struct SkillSheetView: View {
     }
     
     var body: some View {
-        ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [interface.backColor, .white]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-            
-            NavigationSplitView {
-#if !targetEnvironment(macCatalyst)
-                Text(aiManager.currentSkill.name)
-#endif
-                List(selection: $selectedSkillID) {
-                    ForEach(skills) { skill in
-                        SkillRowView(
-                            skill: skill,
-                            isEditing: editMode == .active,
-                            isSelected: selectedSkillID == skill.skillid,
-                            focusedSkillID: $focusedSkillID,
-                            onSelect: {
-                                selectedSkillID = skill.skillid
-                            }
-                        )
-                        .tag(skill.skillid)
-                    }
-                    .onDelete(perform: deleteSkill)
-                }
-                .listStyle(.plain)
-                .background(.thinMaterial)
-                .environment(\.editMode, $editMode)
+        NavigationSplitView {
+            sidebar
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button("Done") {
-                            dismiss()
-                        }
-                    }
-                    
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(editMode == .active ? "Done" : "Edit") {
-                            editMode = editMode == .active ? .inactive : .active
-                        }
-                    }
-                    
-                    ToolbarItem {
-                        Button(action: addSkill) {
-                            Label("Add Skill", systemImage: "plus")
-                        }
-                    }
+                    toolbar()
                 }
-            } detail: {
-                if let selectedSkill {
-                    SkillDetailsView(skill: selectedSkill)
-                } else {
-                    SkillDetailsEmptyView()
-                }
+        } detail: {
+            if let selectedSkill {
+                SkillDetailsView(skill: selectedSkill)
+            } else {
+                SkillDetailsEmptyView()
             }
-            
         }
         .onChange(of: focusedSkillID) { _, newValue in
             guard let newValue else { return }
@@ -107,6 +60,7 @@ struct SkillSheetView: View {
         .onAppear {
             originalSkill = aiManager.currentSkill
             
+#if targetEnvironment(macCatalyst)
             if let stored = allSkills.first(where: { $0.skillid == storedSkill }) {
                 selectedSkillID = stored.skillid
             } else if let current = allSkills.first(where: { $0.skillid == aiManager.currentSkill.skillid }) {
@@ -114,11 +68,69 @@ struct SkillSheetView: View {
             } else {
                 selectedSkillID = skills.first?.skillid
             }
+#endif
         }
         .onDisappear {
             if originalSkill.skillid != aiManager.currentSkill.skillid {
                 aiManager.conversations.last?.history = []
             }
+        }
+    }
+    
+    @ToolbarContentBuilder
+    func toolbar() -> some ToolbarContent {
+        ToolbarItem(placement: .navigationBarLeading) {
+            Button("Done") {
+                dismiss()
+            }
+        }
+        
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Button(editMode == .active ? "Done" : "Edit") {
+                editMode = editMode == .active ? .inactive : .active
+            }
+        }
+        
+        ToolbarItem {
+            Button(action: addSkill) {
+                Label("Add Skill", systemImage: "plus")
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var sidebar: some View {
+        ZStack {
+            LinearGradient(
+                gradient: Gradient(colors: [interface.backColor, .white]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+            
+            List(selection: $selectedSkillID) {
+                ForEach(skills) { skill in
+                    SkillRowView(
+                        skill: skill,
+                        isEditing: editMode == .active,
+                        focusedSkillID: $focusedSkillID,
+                        onSelect: {
+                            selectedSkillID = skill.skillid
+                        }
+                    )
+                    .tag(skill.skillid)
+                    .listRowBackground(
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(aiManager.currentSkill.skillid == skill.skillid ? interface.backColor : Color.clear)
+                    )
+                }
+                .onDelete(perform: deleteSkill)
+            }
+            .listStyle(.sidebar)
+            .scrollContentBackground(.hidden)
+            .background(.thinMaterial)
+            .padding(.vertical, 15)
+            .environment(\.editMode, $editMode)
         }
     }
     
@@ -157,39 +169,9 @@ struct SkillSheetView: View {
     }
 }
 
-private struct SkillRowView2: View {
-    @Bindable var skill: SkillModel
-    let isEditing: Bool
-    var focusedSkillID: FocusState<String?>.Binding
-    let onSelect: () -> Void
-
-    var body: some View {
-        HStack {
-            if isEditing {
-                TextField("Skill name", text: $skill.name)
-                    .focused(focusedSkillID, equals: skill.skillid)
-                    .textFieldStyle(.roundedBorder)
-                    .onTapGesture {
-                        onSelect()
-                    }
-            } else {
-                Text(skill.name)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-        }
-        .contentShape(Rectangle())
-        .onTapGesture {
-            onSelect()
-        }
-    }
-}
-
-
-
 private struct SkillRowView: View {
     @Bindable var skill: SkillModel
     let isEditing: Bool
-    let isSelected: Bool
     var focusedSkillID: FocusState<String?>.Binding
     let onSelect: () -> Void
     
@@ -211,11 +193,6 @@ private struct SkillRowView: View {
         .onTapGesture {
             onSelect()
         }
-        .background(isSelected ? Color.primary.opacity(0.08) : .clear)
-        .listRowBackground(
-            RoundedRectangle(cornerRadius: 8)
-                .fill(isSelected ? Color.accentColor.opacity(0.18) : Color.clear)
-        )
     }
 }
 
@@ -268,4 +245,3 @@ struct SkillDetailsEmptyView: View {
         }
     }
 }
-
