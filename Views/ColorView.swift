@@ -64,14 +64,15 @@ struct ColorView: View {
                     }
                 ))
                 .frame(width: 111, height: 40)
-                .padding(.bottom, 10)
+                .padding(10)
                 Spacer()
                 Toggle(isOn: $interface.isDarkMode) {
                     Text("Dark")
                 }
-                .frame(width: 110)
+                .frame(width: 130)
                 .padding(.bottom, 10)
             }
+            .padding(10)
             Picker("", selection: $interface.selectedColor) {
                 Text("Back").tag(ColorType.back)
                 Text("Text").tag(ColorType.text)

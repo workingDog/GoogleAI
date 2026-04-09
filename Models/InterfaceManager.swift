@@ -23,7 +23,7 @@ import SwiftUI
     
     var kwuiklang = "en"
     var isDarkMode = false
-    var textSize: Int = 12
+    var textSize: Int = 16
     
     
     init() {
