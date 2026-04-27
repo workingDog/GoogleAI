@@ -7,6 +7,7 @@
 import Foundation
 import SwiftUI
 import SwiftData
+import MarkdownUI
 
 
 struct SkillSheetView: View {
@@ -19,6 +20,7 @@ struct SkillSheetView: View {
     
     @State private var selectedSkillID: String?
     @State private var originalSkill = SkillModel(name: "Empty", skill: "")
+    @State private var viewMarkdown: Bool = false
     @State private var editMode: EditMode = .inactive
     @FocusState private var focusedSkillID: String?
     
@@ -42,10 +44,15 @@ struct SkillSheetView: View {
                     toolbar()
                 }
         } detail: {
-            if let selectedSkill {
-                SkillDetailsView(skill: selectedSkill)
-            } else {
-                SkillDetailsEmptyView()
+            Group {
+                if let selectedSkill {
+                    SkillDetailsView(skill: selectedSkill, viewMarkdown: $viewMarkdown)
+                } else {
+                    SkillDetailsEmptyView()
+                }
+            }
+            .toolbar {
+                toolbar2()
             }
         }
         .onChange(of: focusedSkillID) { _, newValue in
@@ -74,6 +81,17 @@ struct SkillSheetView: View {
             if originalSkill.skillid != aiManager.currentSkill.skillid {
                 aiManager.conversations.last?.history = []
             }
+        }
+    }
+    
+    @ToolbarContentBuilder
+    func toolbar2() -> some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Button(viewMarkdown ? "Edit" : "Preview") {
+                viewMarkdown.toggle()
+            }
+            .buttonStyle(.glass)
+            .tint(Color.accentColor)
         }
     }
     
@@ -199,6 +217,7 @@ private struct SkillRowView: View {
 struct SkillDetailsView: View {
     @Environment(InterfaceManager.self) private var interface
     @Bindable var skill: SkillModel
+    @Binding var viewMarkdown: Bool
     
     var body: some View {
         ZStack {
@@ -209,18 +228,41 @@ struct SkillDetailsView: View {
             )
             .ignoresSafeArea()
             
-            TextEditor(text: $skill.skill)
-                .scrollContentBackground(.hidden)
-                .background(
-                    LinearGradient(
-                        gradient: Gradient(colors: [interface.backColor, .white]),
-                        startPoint: .top,
-                        endPoint: .bottom
+            if viewMarkdown {
+                ScrollView {
+                    Markdown(skill.skill)
+                        .markdownTextStyle {
+                            FontFamilyVariant(.normal)
+                            FontSize(CGFloat(interface.textSize))
+                            ForegroundColor(.black)
+                        }
+                        .markdownBlockStyle(\.codeBlock) { configuration in
+                            configuration.label
+                                .relativeLineSpacing(.em(0.25))
+                                .markdownTextStyle {
+                                    FontFamilyVariant(.monospaced)
+                                    FontSize(CGFloat(interface.textSize))
+                                    ForegroundColor(.black)
+                                }
+                                .padding()
+                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                                .markdownMargin(top: .zero, bottom: .em(0.8))
+                        }
+                }
+            } else {
+                TextEditor(text: $skill.skill)
+                    .scrollContentBackground(.hidden)
+                    .background(
+                        LinearGradient(
+                            gradient: Gradient(colors: [interface.backColor, .white]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
                     )
-                )
-                .font(.system(.body, design: .monospaced))
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding()
+                    .font(.system(.body, design: .monospaced))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding()
+            }
         }
     }
 }
