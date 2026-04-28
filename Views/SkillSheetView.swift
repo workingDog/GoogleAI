@@ -137,10 +137,6 @@ struct SkillSheetView: View {
                         }
                     )
                     .tag(skill.skillid)
-                    .listRowBackground(
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(aiManager.currentSkill.skillid == skill.skillid ? interface.backColor : Color.clear)
-                    )
                 }
                 .onDelete(perform: deleteSkill)
             }
