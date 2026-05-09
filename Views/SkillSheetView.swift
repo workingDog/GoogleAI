@@ -60,10 +60,16 @@ struct SkillSheetView: View {
             guard let newValue else { return }
             selectedSkillID = newValue
         }
-        .onChange(of: selectedSkillID) { _, _ in
-            guard let selectedSkill else { return }
-            aiManager.currentSkill = selectedSkill
-            storedSkill = selectedSkill.skillid
+        .onChange(of: selectedSkillID) {
+            if selectedSkillID == nil {
+                aiManager.currentSkill = SkillModel(name: "Empty", skill: "")
+                storedSkill = aiManager.currentSkill.skillid
+            } else {
+                if let skillSelected = selectedSkill {
+                    aiManager.currentSkill = skillSelected
+                    storedSkill = skillSelected.skillid
+                }
+            }
         }
         .onAppear {
             originalSkill = aiManager.currentSkill
