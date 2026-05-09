@@ -73,7 +73,7 @@ struct MainView: View {
     @ViewBuilder
     func InputView() -> some View {
         VStack (spacing: 4) {
-            Text(aiManager.currentSkill.name).font(.caption).padding(.bottom, 8)
+            Text(aiManager.currentSkill?.name ?? "").font(.caption).padding(.bottom, 8)
             Button(action: {
                 isPressed.toggle()
                 focusValue = false

@@ -19,7 +19,7 @@ struct SkillSheetView: View {
     @Query private var allSkills: [SkillModel]
     
     @State private var selectedSkillID: String?
-    @State private var originalSkill = SkillModel(name: "Empty", skill: "")
+    @State private var originalSkill: SkillModel? = nil
     @State private var viewMarkdown: Bool = true
     @State private var editMode: EditMode = .inactive
     @State private var showSearchSheet = false
@@ -62,8 +62,8 @@ struct SkillSheetView: View {
         }
         .onChange(of: selectedSkillID) {
             if selectedSkillID == nil {
-                aiManager.currentSkill = SkillModel(name: "Empty", skill: "")
-                storedSkill = aiManager.currentSkill.skillid
+                aiManager.currentSkill = nil
+                storedSkill = ""
             } else {
                 if let skillSelected = selectedSkill {
                     aiManager.currentSkill = skillSelected
@@ -77,15 +77,18 @@ struct SkillSheetView: View {
 #if targetEnvironment(macCatalyst)
             if let stored = allSkills.first(where: { $0.skillid == storedSkill }) {
                 selectedSkillID = stored.skillid
-            } else if let current = allSkills.first(where: { $0.skillid == aiManager.currentSkill.skillid }) {
+            } else if let aiSkill = aiManager.currentSkill,
+                        let current = allSkills.first(where: { $0.skillid == aiSkill.skillid }) {
                 selectedSkillID = current.skillid
             } else {
-                selectedSkillID = skills.first?.skillid
+                selectedSkillID = nil
             }
 #endif
         }
         .onDisappear {
-            if originalSkill.skillid != aiManager.currentSkill.skillid {
+            if let currentSkill = aiManager.currentSkill,
+               let orgiginal = originalSkill,
+               orgiginal.skillid != currentSkill.skillid {
                 aiManager.conversations.last?.history = []
             }
         }
@@ -198,23 +201,11 @@ struct SkillSheetView: View {
     
     private func deleteSkill(offsets: IndexSet) {
         withAnimation {
-            let deletedIDs = offsets.map { skills[$0].skillid }
-            
             for index in offsets {
                 modelContext.delete(skills[index])
             }
-            
-            if let selectedSkillID, deletedIDs.contains(selectedSkillID) {
-                self.selectedSkillID = skills.enumerated()
-                    .filter { !offsets.contains($0.offset) }
-                    .map(\.element.skillid)
-                    .first
-            }
-            
-            if self.selectedSkillID == nil {
-                aiManager.currentSkill = SkillModel(name: "Empty", skill: "")
-                storedSkill = ""
-            }
+            aiManager.currentSkill = nil
+            storedSkill = ""
         }
     }
 }

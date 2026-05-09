@@ -12,7 +12,7 @@ import GeminiKitAPI
 
 @Observable class AiManager {
     
-    var currentSkill: SkillModel = SkillModel(name: "Empty", skill: "")
+    var currentSkill: SkillModel? = nil //SkillModel(name: "Empty", skill: "")
     
     var conversations = [Conversation]()
     
@@ -128,7 +128,7 @@ import GeminiKitAPI
 
             let chat = client.startChat(
                 model: model,
-                systemInstruction: currentSkill.skill,
+                systemInstruction: currentSkill?.skill ?? "",
                 history: history)
             
             let reply = try await chat.sendMessage(text)

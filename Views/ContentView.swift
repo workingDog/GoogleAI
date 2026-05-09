@@ -58,15 +58,12 @@ struct ContentView: View {
 
             // initial example skills
             if allSkills.isEmpty {
-                modelContext.insert(SkillModel(name: "Empty", skill: ""))
                 modelContext.insert(SkillModel(name: "StarterSkill", skill: StarterSkill))
                 modelContext.insert(SkillModel(name: "GeneralTask", skill: GeneralTask))
                 modelContext.insert(SkillModel(name: "SkillCreator", skill: SkillCreatorAgent))
             }
 
-            if let skill = allSkills.first(where: { $0.skillid == storedSkill }) {
-                aiManager.currentSkill = skill
-            }
+            aiManager.currentSkill = allSkills.first(where: { $0.skillid == storedSkill })
 
 //            let appSupportDir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).last
 //            print("---> \(appSupportDir)")
