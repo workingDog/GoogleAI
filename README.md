@@ -28,7 +28,7 @@ then type a question **before** you tap on the main button.
 
 -   **Tap on the share**, to share the previously tapped text or picture. 
 
--   **Tap on the skill** button, to add/delete/modify skills in YAML frontmatter followed by Markdown content. The selected *skill* is then used in the call to the AI. In addition, a search for **skills** in [Skyll](https://www.skyll.app/) can be made using a natural languge query.
+-   **Tap on the skill** button, to add/delete/modify skills in YAML frontmatter followed by Markdown content. The selected *skill* is then used in the call to the AI. In addition, a search for **skills** in [Skyll](https://www.skyll.app/) can be made using a natural language query.
 
 
 #### Settings
