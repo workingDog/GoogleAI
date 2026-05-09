@@ -1,5 +1,5 @@
 {
-  "originHash" : "0cde3fddc592e2d469acb68727fcaca71f5fc62d5126814f2d9e483da6e36543",
+  "originHash" : "136e0ee7e5038d68d89852ffde2977b70930d9fc9289013e8a2157b5138f42b4",
   "pins" : [
     {
       "identity" : "geminikitapi",
@@ -35,6 +35,15 @@
       "state" : {
         "revision" : "5f613358148239d0292c0cef674a3c2314737f9e",
         "version" : "2.4.1"
+      }
+    },
+    {
+      "identity" : "swiftskyllkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/workingDog/SwiftSkyllKit",
+      "state" : {
+        "revision" : "9241e4206188603d1ce5e6d006219cade813859b",
+        "version" : "0.1.0"
       }
     }
   ],

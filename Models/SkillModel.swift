@@ -15,7 +15,7 @@ final class SkillModel {
     
     var name: String
     var skill: String
-    
+
     init(name: String, skill: String) {
         self.name = name
         self.skill = skill

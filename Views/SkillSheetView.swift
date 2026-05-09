@@ -20,8 +20,9 @@ struct SkillSheetView: View {
     
     @State private var selectedSkillID: String?
     @State private var originalSkill = SkillModel(name: "Empty", skill: "")
-    @State private var viewMarkdown: Bool = false
+    @State private var viewMarkdown: Bool = true
     @State private var editMode: EditMode = .inactive
+    @State private var showSearchSheet = false
     @FocusState private var focusedSkillID: String?
     
     @AppStorage(SKILLKEY) private var storedSkill: String = ""
@@ -41,7 +42,7 @@ struct SkillSheetView: View {
         NavigationSplitView {
             sidebar
                 .toolbar {
-                    toolbar()
+                    sidebarToolbar()
                 }
         } detail: {
             Group {
@@ -52,7 +53,7 @@ struct SkillSheetView: View {
                 }
             }
             .toolbar {
-                toolbar2()
+                detailToolbar()
             }
         }
         .onChange(of: focusedSkillID) { _, newValue in
@@ -85,34 +86,40 @@ struct SkillSheetView: View {
     }
     
     @ToolbarContentBuilder
-    func toolbar2() -> some ToolbarContent {
-        ToolbarItem(placement: .navigationBarTrailing) {
-            Button(viewMarkdown ? "Edit" : "Preview") {
-                viewMarkdown.toggle()
-            }
-            .buttonStyle(.glass)
-            .tint(Color.accentColor)
+    func detailToolbar() -> some ToolbarContent {
+        ToolbarItemGroup(placement: .navigationBarTrailing) {
+            Picker("", selection: $viewMarkdown) {
+                Text("Edit").tag(false)
+                Text("Preview").tag(true)
+            }.pickerStyle(.segmented)
+             .frame(width: 200)
         }
     }
     
     @ToolbarContentBuilder
-    func toolbar() -> some ToolbarContent {
+    func sidebarToolbar() -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
             Button("Done") {
                 dismiss()
-            }
+            }.buttonStyle(.bordered).fixedSize()
         }
         
+        ToolbarItem(placement: .automatic) {
+            Button("Search Skyll") {
+                showSearchSheet = true
+            }.buttonStyle(.bordered).fixedSize()
+        }
+
         ToolbarItem(placement: .navigationBarTrailing) {
-            Button(editMode == .active ? "Done" : "Edit") {
+            Button(editMode == .active ? "Done" : "Manage") {
                 editMode = editMode == .active ? .inactive : .active
-            }
+            }.buttonStyle(.bordered).fixedSize()
         }
         
         ToolbarItem {
             Button(action: addSkill) {
                 Label("Add Skill", systemImage: "plus")
-            }
+            }.buttonStyle(.bordered).fixedSize()
         }
     }
     
@@ -128,15 +135,32 @@ struct SkillSheetView: View {
             
             List(selection: $selectedSkillID) {
                 ForEach(skills) { skill in
-                    SkillRowView(
-                        skill: skill,
-                        isEditing: editMode == .active,
-                        focusedSkillID: $focusedSkillID,
-                        onSelect: {
-                            selectedSkillID = skill.skillid
-                        }
-                    )
+                    HStack(alignment: .top, spacing: 12) {
+                        Button {
+                            if selectedSkillID == skill.skillid {
+                                selectedSkillID = nil
+                            } else {
+                                selectedSkillID = skill.skillid
+                            }
+                        } label: {
+                            Image(systemName: selectedSkillID == skill.skillid ? "checkmark.circle.fill" : "circle")
+                                .foregroundStyle(selectedSkillID == skill.skillid ? Color.green : Color.blue)
+                                .font(.title3)
+                        }.buttonStyle(.plain)
+                        Spacer()
+                        SkillRowView(
+                            skill: skill,
+                            isEditing: editMode == .active,
+                            focusedSkillID: $focusedSkillID,
+                            onSelect: {
+                                selectedSkillID = skill.skillid
+                            }
+                        )
+                        Spacer()
+                    }
                     .tag(skill.skillid)
+                    .padding(10)
+                    .listRowBackground(Color.green.opacity(0.2))
                 }
                 .onDelete(perform: deleteSkill)
             }
@@ -145,6 +169,12 @@ struct SkillSheetView: View {
             .background(.thinMaterial)
             .padding(.vertical, 15)
             .environment(\.editMode, $editMode)
+            
+        }
+        .sheet(isPresented: $showSearchSheet) {
+            SkyllSearchView(selectedSkillID: $selectedSkillID)
+                .environment(aiManager)
+                .presentationDetents([.large])
         }
     }
     

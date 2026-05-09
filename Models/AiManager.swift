@@ -121,7 +121,7 @@ import GeminiKitAPI
             print("----> error: \(error)")
         }
     }
-
+    
     func getChats(from text: String) async {
         do {
             let history: [Content] = conversations.last?.history ?? []

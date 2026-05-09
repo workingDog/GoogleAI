@@ -13,22 +13,22 @@ Using the Swift [GeminiKitAPI](https://github.com/workingDog/GeminiKitAPI) libra
 
 ### Usage
 
--   **Pick** the conversation mode first, *Chat*, *Image* or *Camera*, 
+-   **Pick the conversation mode first**, *Chat*, *Image* or *Camera*, 
 then type a question **before** you tap on the main button.
 
     - *Chat* for chat like interaction,
     - *Image* for selecting one or more images from the Photos library,
     - *Camera* to take one picture using the camera.
     
--   **Tap** on a question or answer text, to **copy** the text to the *Pasteboard* and enable you to paste it elsewhere or *share* it. Similarly, tap on the picture to copy just the image.
+-   **Tap on a question or answer text**, to **copy** the text to the *Pasteboard* and enable you to paste it elsewhere or *share* it. Similarly, tap on the picture to copy just the image.
   
 -   **Swipe left** on a question/answer, to deleted it.
   
--   **Tap** on the *trash can*, to delete **all** questions and answers. 
+-   **Tap on the trash can**, to delete **all** questions and answers. 
 
--   **Tap** on the *share*, to share the previously tapped text or picture. 
+-   **Tap on the share**, to share the previously tapped text or picture. 
 
--   **Tap** on the *skill* button, to add/delete/modify skills in YAML frontmatter followed by Markdown content. The selected basic *skill* is then used in the call to the AI. Note no *tools* are called.
+-   **Tap on the skill** button, to add/delete/modify skills in YAML frontmatter followed by Markdown content. The selected *skill* is then used in the call to the AI. In addition, a search for **skills** in [Skyll](https://www.skyll.app/) can be made using a natural languge query.
 
 
 #### Settings
@@ -51,11 +51,13 @@ Note, the [Google AI key](https://ai.google.dev/) is stored securely on the devi
 -    [Agent Skills github](https://github.com/agentskills/agentskills)
 -    [Swift Agent Skills](https://github.com/twostraws/Swift-Agent-Skills)
 -    [Gemini API skills](https://github.com/google-gemini/gemini-skills)
+-    [Skyll](https://www.skyll.app/)
 
 #### Dependencies
 
 -    [GeminiKitAPI](https://github.com/workingDog/GeminiKitAPI) derived from the original repo [GeminiKit](https://github.com/guitaripod/GeminiKit)
 -    [MarkdownUI](https://github.com/gonzalezreal/swift-markdown-ui)
+-   [SwiftSkyllKit](https://github.com/workingDog/SwiftSkyllKit)
 
 See also
 

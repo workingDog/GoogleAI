@@ -27,7 +27,7 @@ struct InfoItem: Identifiable, Hashable {
     var question: InfoItem
     var answer: InfoItem
     var history: [Content]
-    
+
     init(question: InfoItem = InfoItem(text: "", images: []),
          answer: InfoItem = InfoItem(text: "", images: []),
          history: [Content] = []) {

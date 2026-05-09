@@ -37,6 +37,11 @@
 		C7BFB09E2F84ACD300252BE5 /* picture1.png in Resources */ = {isa = PBXBuildFile; fileRef = C7BFB09D2F84ACD300252BE5 /* picture1.png */; };
 		C7CE2BD72A2EEAEF00BB552B /* SimpleBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE2BD62A2EEAEF00BB552B /* SimpleBubble.swift */; };
 		C7DF9AAF2BA99867006FADE8 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF9AAE2BA99867006FADE8 /* CameraView.swift */; };
+		C7E30B3A2FAEC4DF00C7C8F3 /* SkyllSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E30B392FAEC4D800C7C8F3 /* SkyllSearchView.swift */; };
+		C7E30B3F2FAEC60400C7C8F3 /* SwiftSkyllKit in Frameworks */ = {isa = PBXBuildFile; productRef = C7E30B3E2FAEC60400C7C8F3 /* SwiftSkyllKit */; };
+		C7E30B412FAEC7C100C7C8F3 /* SkyllService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E30B402FAEC7BB00C7C8F3 /* SkyllService.swift */; };
+		C7E30B432FAECA7F00C7C8F3 /* SkyllDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E30B422FAECA7700C7C8F3 /* SkyllDetailView.swift */; };
+		C7E30B452FAECAD300C7C8F3 /* MKView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E30B442FAECAD000C7C8F3 /* MKView.swift */; };
 		C7FBCDD129E52A7A00C457BB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FBCDD029E52A7A00C457BB /* MainView.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +77,10 @@
 		C7BFB09D2F84ACD300252BE5 /* picture1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture1.png; sourceTree = "<group>"; };
 		C7CE2BD62A2EEAEF00BB552B /* SimpleBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBubble.swift; sourceTree = "<group>"; };
 		C7DF9AAE2BA99867006FADE8 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		C7E30B392FAEC4D800C7C8F3 /* SkyllSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyllSearchView.swift; sourceTree = "<group>"; };
+		C7E30B402FAEC7BB00C7C8F3 /* SkyllService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyllService.swift; sourceTree = "<group>"; };
+		C7E30B422FAECA7700C7C8F3 /* SkyllDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyllDetailView.swift; sourceTree = "<group>"; };
+		C7E30B442FAECAD000C7C8F3 /* MKView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKView.swift; sourceTree = "<group>"; };
 		C7FBCDD029E52A7A00C457BB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7E30B3F2FAEC60400C7C8F3 /* SwiftSkyllKit in Frameworks */,
 				C75EA5202F677D0A00F201E5 /* MarkdownUI in Frameworks */,
 				C79EE8512F85CFDF00DA91AB /* GeminiKitAPI in Frameworks */,
 			);
@@ -134,6 +144,7 @@
 		C738A8E129E4391E009E9494 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C7E30B402FAEC7BB00C7C8F3 /* SkyllService.swift */,
 				C785CBCC2F83526E008A4149 /* SkillModel.swift */,
 				C738A8E229E4391E009E9494 /* Conversation.swift */,
 				C738A8E329E4391E009E9494 /* AiManager.swift */,
@@ -156,6 +167,9 @@
 		C738A8EB29E4391E009E9494 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C7E30B442FAECAD000C7C8F3 /* MKView.swift */,
+				C7E30B422FAECA7700C7C8F3 /* SkyllDetailView.swift */,
+				C7E30B392FAEC4D800C7C8F3 /* SkyllSearchView.swift */,
 				C71D37692F83452400720835 /* SkillSheetView.swift */,
 				C738A8F329E4391E009E9494 /* ContentView.swift */,
 				C7FBCDD029E52A7A00C457BB /* MainView.swift */,
@@ -208,6 +222,7 @@
 			packageProductDependencies = (
 				C75EA51F2F677D0A00F201E5 /* MarkdownUI */,
 				C79EE8502F85CFDF00DA91AB /* GeminiKitAPI */,
+				C7E30B3E2FAEC60400C7C8F3 /* SwiftSkyllKit */,
 			);
 			productName = KwuikAI;
 			productReference = C738A8C929E43737009E9494 /* KwuikAI.app */;
@@ -241,6 +256,7 @@
 			packageReferences = (
 				C75EA51E2F677D0A00F201E5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				C79EE84F2F85CFDF00DA91AB /* XCRemoteSwiftPackageReference "GeminiKitAPI" */,
+				C7E30B3D2FAEC60400C7C8F3 /* XCRemoteSwiftPackageReference "SwiftSkyllKit" */,
 			);
 			productRefGroup = C738A8CA29E43737009E9494 /* Products */;
 			projectDirPath = "";
@@ -276,6 +292,7 @@
 				C738A90E29E4391E009E9494 /* CompletionView.swift in Sources */,
 				C7FBCDD129E52A7A00C457BB /* MainView.swift in Sources */,
 				C738A90429E4391E009E9494 /* Utility.swift in Sources */,
+				C7E30B412FAEC7C100C7C8F3 /* SkyllService.swift in Sources */,
 				C7DF9AAF2BA99867006FADE8 /* CameraView.swift in Sources */,
 				C738A90229E4391E009E9494 /* Conversation.swift in Sources */,
 				C738A91029E4391E009E9494 /* SettingView.swift in Sources */,
@@ -288,8 +305,11 @@
 				C738A90B29E4391E009E9494 /* KeyView.swift in Sources */,
 				C738A8CD29E43737009E9494 /* KwuikAIApp.swift in Sources */,
 				C738A91129E4391E009E9494 /* ContentView.swift in Sources */,
+				C7E30B452FAECAD300C7C8F3 /* MKView.swift in Sources */,
 				C738A90529E4391E009E9494 /* StoreService.swift in Sources */,
 				C738A91329E4391E009E9494 /* KeychainInterface.swift in Sources */,
+				C7E30B432FAECA7F00C7C8F3 /* SkyllDetailView.swift in Sources */,
+				C7E30B3A2FAEC4DF00C7C8F3 /* SkyllSearchView.swift in Sources */,
 				C7CE2BD72A2EEAEF00BB552B /* SimpleBubble.swift in Sources */,
 				C71D376A2F83452600720835 /* SkillSheetView.swift in Sources */,
 				C797CA202B9D1C1500FDB525 /* InterfaceManager.swift in Sources */,
@@ -571,6 +591,14 @@
 				kind = branch;
 			};
 		};
+		C7E30B3D2FAEC60400C7C8F3 /* XCRemoteSwiftPackageReference "SwiftSkyllKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/workingDog/SwiftSkyllKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -583,6 +611,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C79EE84F2F85CFDF00DA91AB /* XCRemoteSwiftPackageReference "GeminiKitAPI" */;
 			productName = GeminiKitAPI;
+		};
+		C7E30B3E2FAEC60400C7C8F3 /* SwiftSkyllKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C7E30B3D2FAEC60400C7C8F3 /* XCRemoteSwiftPackageReference "SwiftSkyllKit" */;
+			productName = SwiftSkyllKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
