@@ -17,6 +17,7 @@ struct SkyllSearchView: View {
     
     @Binding var selectedSkillID: String?
     
+    @State private var isThinking: Bool = false
     @State private var selectedSkill: SkillModel?
     @State private var skills: [SkillModel] = []
     @State private var query = ""
@@ -39,7 +40,7 @@ struct SkyllSearchView: View {
                     }.buttonStyle(.borderedProminent)
                 }
 
-                if SkyllService.shared.isLoading {
+                if isThinking {
                     HStack {
                         Spacer()
                         ProgressView()
@@ -57,9 +58,10 @@ struct SkyllSearchView: View {
                         HStack(alignment: .top, spacing: 12) {
                             Button {
                                 if selectedSkill == skill {
-                                    selectedSkill = nil
+                                    selectedSkill = nil    // de-select
                                 } else {
-                                    selectedSkill = skill
+                                    selectedSkill = skill  // select
+                                    updateSelection()
                                 }
                             } label: {
                                 Image(systemName: selectedSkill == skill ? "checkmark.circle.fill" : "circle")
@@ -88,20 +90,27 @@ struct SkyllSearchView: View {
                     }.buttonStyle(.bordered).fixedSize()
                 }
             }
-            .onDisappear {
-                if let selectedSkill {
-                    selectedSkillID = selectedSkill.skillid
-                    aiManager.currentSkill = selectedSkill
-                    storedSkill = selectedSkill.skillid
-                    modelContext.insert(selectedSkill)
-                }
-            }
         }
     }
 
+    private func updateSelection() {
+        if let selectedSkill {
+            selectedSkillID = selectedSkill.skillid
+            aiManager.currentSkill = selectedSkill
+            storedSkill = selectedSkill.skillid
+            modelContext.insert(selectedSkill)
+        } else {
+            selectedSkillID = nil
+            aiManager.currentSkill = nil
+            storedSkill = ""
+        }
+    }
+    
     private func startSearch() {
         Task {
+            isThinking = true
             skills = try await SkyllService.shared.searchSkills(query: query)
+            isThinking = false
         }
     }
     

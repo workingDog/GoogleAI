@@ -14,7 +14,6 @@ final class SkyllService {
 
     private let client: SkyllClient
     
-    var isLoading: Bool = false
     var error: Error?
 
     private init(client: SkyllClient = SkyllClient()) {
@@ -23,7 +22,6 @@ final class SkyllService {
 
     func searchSkills(query: String, limit: Int = 10) async throws -> [SkillModel] {
         var theSkills: [SkillModel] = []
-        isLoading = true
         error = nil
         do {
             let skylls = try await client.searchSkills(
@@ -32,7 +30,10 @@ final class SkyllService {
                 includeContent: true,
                 includeReferences: false
             )
-            theSkills = skylls.map{ SkillModel(name: $0.title, skill: $0.content ?? "") }
+            theSkills = skylls.map{
+                let markdown = $0.rawContent ?? $0.content ?? ""
+                return SkillModel(name: $0.title, skill: markdown)
+            }
         } catch let error as SkyllError {
             switch error {
                 case let .serverError(_, response): print("Skyll API error: \(response.message)")
@@ -42,7 +43,6 @@ final class SkyllService {
             print(error.localizedDescription)
             self.error = error
         }
-        isLoading = false
         return theSkills
     }
  
